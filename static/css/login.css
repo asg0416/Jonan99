@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+
+* {
+  font-family: 'Jua', sans-serif;
+}
+
+.big_login_box {
+    /*background-color: green;*/
+    width: 800px;
+    height: 600px;
+    text-align: center;
+    margin: 250px auto 0px auto;
+}
+
+.form-control {
+    margin: auto;
+}
