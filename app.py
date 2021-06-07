@@ -18,4 +18,8 @@ def login():
 def sign_up():
    return render_template('sign_up.html')
 
+@app.route('/content')
+def content():
+   return render_template('content.html')
+
 app.run('0.0.0.0',port=5000,debug=True)
