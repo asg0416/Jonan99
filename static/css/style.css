@@ -1,0 +1,25 @@
+* {
+  font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+}
+
+body {
+  height: 100%;
+  margin: 0;
+}
+
+.mainCenter {
+  color: red;
+  font-weight: bold;
+  font-size: 160px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%)
+}
+
+.mainPage {
+  height: 100vh;
+  background-image: url("https://hanghae99.spartacodingclub.kr/static/images/main/hero.jpg");
+  background-position: center;
+  background-size: cover;
+}
