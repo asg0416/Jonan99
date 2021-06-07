@@ -1,0 +1,99 @@
+.navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(0, 0, 0, 0.9);
+}
+
+a {
+  text-decoration: none;
+}
+
+.backImg {
+  height: 100vh;
+  background-image: url("https://hanghae99.spartacodingclub.kr/static/images/main/hero.jpg");
+  background-position: center;
+  background-size: cover;
+  position: relative;
+}
+
+.contentMain {
+  display: flex;
+  justify-content: center;
+  width: 800px;
+  height: 700px;
+  border: 1px solid whitesmoke;
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.labelTitle {
+  margin-bottom: 1px;
+  display: block;
+  color: azure;
+  padding: 4px;
+}
+
+.labelContentIn {
+  margin-bottom: 1px;
+  display: block;
+  color: azure;
+  padding: 4px;
+}
+
+.labelnickName {
+  margin-bottom: 1px;
+  display: block;
+  color: azure;
+  padding: 4px;
+}
+
+.wrap {
+  width: 800px;
+  height: 700px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+
+input {
+  text-align: center;
+  width: 500px;
+}
+
+.submitButton {
+  margin: 0 100px;
+}
+
+.backButton {
+  margin: 0 100px;
+}
+
+.inContent {
+  width: 500px;
+}
+
+.introduceText {
+  color: beige;
+}
+
+#contentIn {
+  resize: none;
+  padding-top: 10px;
+  padding-left: 14px;
+  background-color: rgb(235, 241, 241);
+  border: azure;
+}
+
+#title {
+  padding: 5px 0px;
+  background-color: rgb(235, 241, 241);
+}
+
+#nickname {
+  padding: 5px 0px;
+  background-color: rgb(235, 241, 241);
+}
