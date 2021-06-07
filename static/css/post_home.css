@@ -1,0 +1,51 @@
+.top {
+    display: block;
+    width: 1200px;
+    margin: auto;
+    padding-top: 10px;
+    text-align: center;
+}
+
+.background {
+    /*height: 100vh;*/
+    /*background-image: url("https://hanghae99.spartacodingclub.kr/static/images/main/hero.jpg");*/
+    /*background-position: center;*/
+    /*background-size: cover;*/
+
+    background-attachment: fixed;
+    background-image: url("https://hanghae99.spartacodingclub.kr/static/images/main/hero.jpg");
+    background-position: top;
+    background-size: cover;
+
+    height: 100vw;
+    z-index: -1;
+}
+
+.main_title {
+    display: inline-block;
+    text-align: center;
+    margin: auto;
+    color: red;
+}
+
+#login_btn {
+    display: inline;
+    float: right;
+}
+
+.main_wrap {
+    padding: 15px;
+    margin: 10px auto;
+    width: 1200px;
+    background-color: #bfbfbf;
+    opacity: 0.8;
+    z-index: 1;
+}
+
+.menu_nav {
+    border: black 1px solid;
+    border-radius: 5px;
+    padding-top: 15px;
+    padding-bottom: 0;
+    margin-bottom: 20px;
+}
