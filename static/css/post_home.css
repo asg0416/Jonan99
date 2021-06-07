@@ -1,8 +1,13 @@
+::-webkit-scrollbar {
+  display: none;
+}
+
+
 .top {
     display: block;
     width: 1200px;
     margin: auto;
-    padding-top: 10px;
+    padding: 20px;
     text-align: center;
 }
 
@@ -17,7 +22,8 @@
     background-position: top;
     background-size: cover;
 
-    height: 100vw;
+    min-height: 100vh;
+    height: 100%;
     z-index: -1;
 }
 
@@ -31,6 +37,7 @@
 #login_btn {
     display: inline;
     float: right;
+    margin-top: 5px;
 }
 
 .main_wrap {
@@ -48,4 +55,28 @@
     padding-top: 15px;
     padding-bottom: 0;
     margin-bottom: 20px;
+}
+
+.cards_columns{
+    column-width: 300px;
+    column-gap: normal;
+    column-count: auto;
+    column-fill: balance;
+}
+
+.card_bottom{
+    display: block;
+    text-align: right;
+}
+
+.nick_text{
+    float: left;
+}
+
+.modify_btn{
+    font-size: small;
+}
+
+.delete_btn{
+    font-size: small;
 }
