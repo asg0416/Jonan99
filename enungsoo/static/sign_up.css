@@ -1,0 +1,62 @@
+/*font-family: 'Jua', sans-serif;*/
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+
+* {
+  font-family: 'Jua', sans-serif;
+}
+
+body {
+  /* background-image: url('/static/.png'); */
+  background-color: aliceblue;
+  min-height: 100vh;
+}
+
+.section {
+  padding: 50px 0;
+  max-width: 750px;
+  margin: auto;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  padding: 50px 0px;
+  text-align: center;
+}
+
+.box {
+  max-width: 800px;
+  margin: 0 auto;
+  border: 2px solid black;
+}
+
+button {
+  width: 100px;
+  height: 50px;
+}
+
+.title {
+  font-weight: 800;
+  font-size: 5rem;
+}
+
+.subtitle {
+  font-size: 2rem;
+}
+
+.is-jonan {
+  color: black !important;
+}
+
+.left_tile {
+  background-color: #FF5833 !important;
+}
+
+.input{
+  height: 50px;
+}
