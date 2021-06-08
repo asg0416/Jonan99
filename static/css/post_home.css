@@ -55,6 +55,10 @@
     margin-bottom: 20px;
 }
 
+.post_text{
+    color: red;
+    font-size: large;
+}
 
 .cards_columns{
     column-width: 300px;
@@ -85,9 +89,18 @@
 
 .modify_btn{
     font-size: small;
+    color: grey;
 }
 
 .delete_btn{
     font-size: small;
     margin-left: 0 !important;
+    color: grey;
+}
+
+.like_btn{
+    float: left;
+    font-size: 15px;
+    color: red;
+    font-family: 'Consolas', 'Deja Vu Sans Mono', 'Bitstream Vera Sans Mono', monospace;
 }
