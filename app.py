@@ -65,10 +65,15 @@ def post_content():
         'comment': comment_receive,
         'nickname': nickname_receive
     }
-
+    
     db.jonan.insert_one(doc)
 
     return jsonify({'msg': '글 작성 완료'})
+
+@app.route('/api/content', methods=['GET'])
+def show_content():
+    contents = list(db.diary.find({}, {'_id': False}))
+    return jsonify({'all_content': contents})
 
 
 app.run('0.0.0.0',port=5000,debug=True)
