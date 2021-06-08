@@ -11,68 +11,77 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-
-        <!-- Custom CSS -->
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="../static/css/sign_up.css">
-
+    <script type="text/javascript">
+        //회원가입 완료
+        function register() {
+            alert('조난힘든어님, 회원 가입을 축하드립니다');
+            window.location.href = "/login"
+            return;
+        }
+    </script>
 </head>
+
 <body>
 
 <!-- 상단 타이틀 -->
-<section class="left_tile">
-    <div class="hero-body has-text-centered">
-        <h1 class="title is-jonan">Jonan99</h1>
-        <h3 class="subtitle is-jonan">항해99 중 조난당한 사람들의 이야기</h3>
+<section class="top_tile">
+    <div class="top_title">
+        <h1 class="title">Jonan99</h1>
+        <h3 class="subtitle">항해99 중 조난당한 사람들의 이야기</h3>
     </div>
 </section>
 
 <!-- 회원가입 박스 -->
-<section class="section">
-    <div class="container">
+<div class="container">
+    <div class="box">
+        <div class="content">
+            <div>
+                <!-- 회원가입 박스 타이틀 -->
+                <h1>회원가입</h1>
 
-        <!-- 회원가입 박스 -->
-        <div class="box">
-            <article class="media">
-                <div class="media-content">
-                    <div class="content">
-
-                        <!-- 회원가입 박스 타이틀 -->
-                        <h1 class="p-5">회원가입</h1>
-
-                        <!-- 아이디 -->
-                        <div class="input-group my-5 align-items-center">
-                            <span class="text-center col-2" id="inputGroup-sizing-default">아이디</span>
-                            <input type="text" id="id_input" class="input dup_before col-8" placeholder="ID를 입력하세요!"
-                                   aria-describedby="button-addon2">
-                            <span class="col-2">
-                  <button class="btn btn-dark" type="button" id="id_dup_button" onclick="id_dup_check()">중복 확인</button>
-                </span>
-                        </div>
-
-                        <!-- 비밀번호 -->
-                        <div class="input-group my-5 align-items-center">
-                            <span class="text-center col-2" id="inputGroup-sizing-default">비밀번호</span>
-                            <input type="password" id="pwd_input1" class="input col-10"
-                                   placeholder="영문+숫자 조합 6자리 이상으로 입력하세요!" aria-describedby="button-addon2">
-                        </div>
-
-                        <!-- 비밀번호 확인 -->
-                        <div class="input-group my-5 align-items-center">
-                            <span class="text-center col-2" id="inputGroup-sizing-default">비밀번호 확인</span>
-                            <input type="password" id="pwd_input2" class="input col-10"
-                                   placeholder="비밀번호를 다시 한번 입력해주세요!"
-                                   aria-describedby="button-addon2">
-                        </div>
-
-                        <!-- 가입하기 버튼 -->
-                        <button type="button" class="btn btn-dark m-4" onclick="location.href='/'">로그인하기</button>
-                        <button type="button" class="btn btn-dark m-4" onclick="sing_up()">가입하기</button>
-
-
+                <!-- 아이디 -->
+                <div class="input-group ">
+                    <div class="input-group mb-3 align-items-center">
+                        <span class="text-centered col-2">아이디</span>
+                        <input type="text" class="form-control" id="id_input" placeholder="ID를 입력하세요!"
+                               aria-label="Recipient's username" aria-describedby="button-addon2">
+                        <span>
+                            <button class="btn btn-outline-secondary" type="button" id="button-addon2"
+                                    onclick="alert('중복된 아이디가 없습니다')">중복확인</button>
+                            </span>
+                    </div>
                 </div>
-            </article>
+
+                <!-- 비밀번호 -->
+                <div class="input-group ">
+                    <div class="input-group mb-3 align-items-center">
+                        <span class="text-centered col-2">비밀번호</span>
+                        <input type="text" class="form-control" id="id_input" placeholder="영문+숫자 조합 6자리 이상으로 입력하세요!"
+                               aria-label="Recipient's username" aria-describedby="button-addon2">
+                    </div>
+                </div>
+
+                <!-- 비밀번호확인 -->
+                <div class="input-group ">
+                    <div class="input-group mb-3 align-items-center">
+                        <span class="text-centered col-2">비밀번호 확인</span>
+                        <input type="text" class="form-control" id="id_input" placeholder="ID를 입력하세요!"
+                               aria-label="Recipient's username" aria-describedby="button-addon2">
+                    </div>
+                </div>
+
+                <!-- 가입하기 버튼 -->
+                <button type="button" class="btn btn-dark" onclick="register()">회원가입</button>
+                <button type="button" class="btn btn-dark" onclick="location.href='/login'">취소</button>
+
+            </div>
         </div>
-        <!-- End of 회원가입 박스 -->
+    </div>
+</div>
+
+<!-- End of 회원가입 박스 -->
 
 </body>
 </html>

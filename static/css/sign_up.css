@@ -5,58 +5,72 @@
   font-family: 'Jua', sans-serif;
 }
 
-body {
-  /* background-image: url('/static/.png'); */
-  background-color: aliceblue;
-  min-height: 100vh;
-}
-
-.section {
-  padding: 50px 0;
-  max-width: 750px;
-  margin: auto;
-}
-
-.wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-}
-
-.container {
-  padding: 50px 0px;
-  text-align: center;
-}
-
-.box {
-  max-width: 800px;
-  margin: 0 auto;
-  border: 2px solid black;
-}
-
-button {
-  width: 100px;
-  height: 50px;
-}
-
 .title {
-  font-weight: 800;
-  font-size: 5rem;
-}
+    font-weight: 800;
+    font-size: 80px;
+    color: black;
+  }
 
-.subtitle {
-  font-size: 2rem;
-}
+  .subtitle {
+    font-size: 32px;
+    color: rgb(30, 65, 180);
+  }
 
-.is-jonan {
-  color: black !important;
-}
+  .top_tile {
+    background-color: #FF5833;
+  }
 
-.left_tile {
-  background-color: #FF5833 !important;
-}
+  body {
+    /* background-image: url('/static/.png'); */
+    background-color: aliceblue;
+    min-height: 1200px;
+  }
 
-.input{
-  height: 50px;
-}
+ .container{
+     margin-top: 200px;
+ }
+
+ .box{
+     background-color: grey;
+     max-width: 800px;
+     margin: 0 auto;
+     border: 2px solid black;
+     border-radius: 15px;
+     padding: 40px;
+ }
+
+ .content{
+     text-align: center;
+     margin-top: 20px;
+ }
+
+ .input-group{
+     max-width: 740px;
+     margin-top: 20px;
+ }
+
+ .text-centered{
+     text-align: center;
+ }
+
+ .btn {
+    width: 100px;
+    height: 50px;
+    color: white;
+    background-color: black;
+  }
+
+ input{
+    height: 50px;
+    margin-right: 20px;
+ }
+
+ .form-control{
+    border: black 2px solid;
+ }
+
+ .btn-dark{
+     margin-top: 20px;
+     margin-right: 30px;
+     margin-left: 30px;
+ }
