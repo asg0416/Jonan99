@@ -22,6 +22,24 @@
   <link rel="stylesheet" href="../static/css/content.css">
   <link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css' rel='stylesheet' type='text/css'>
   <title>조난99</title>
+
+  <script>
+    function postContent() {
+      let title = $('#title').val()
+      let comment = $('#contentIn').val()
+      let nickname = $('#nickname').val()
+
+      $.ajax({
+        type: "POST",
+        url: "/api/content",
+        data: { title_give: title, comment_give: comment, nickname_give: nickname },
+        success: function (response) {
+          alert(response["msg"]);
+          window.location.href = "/post_home"
+        }
+      })
+    }
+  </script>
 </head>
 
 <body>
@@ -34,29 +52,28 @@
   </nav>
   <div class="backImg">
     <section class="contentMain mx-auto col-lg-6 col-md-8 col-sm-10 col-12">
-      <form action="" method="">
-        <div class="wrap">
-          <div class="introduceText">
-            당신의 하소연을 풀어주세요...
-          </div>
-          <div class="contentTitle">
-            <label class="labelTitle" for="title">제목</label>
-            <input class="text" type="text" name="za" id="title">
-          </div>
-          <div class="inContent">
-            <label class="labelContentIn" for="contentIn">내용</label>
-            <textarea name="" id="contentIn" cols="60" rows="8"></textarea>
-          </div>
-          <div class="nickName">
-            <label class="labelnickName" for="nickname">닉네임</label>
-            <input class="text" type="text" name="aa" id="nickname">
-          </div>
-          <div class="submitBtn">
-            <button class="submitButton btn btn-outline-dark" type="submit" style="color: azure;">게시하기</button>
-            <button class="backButton btn btn-outline-dark" type="Button" style="color: azure;">돌아가기</button>
-          </div>
+      <div class="wrap">
+        <div class="introduceText">
+          당신의 하소연을 풀어주세요...
         </div>
-      </form>
+        <div class="contentTitle">
+          <label class="labelTitle" for="title">제목</label>
+          <input class="text" type="text" name="title" id="title">
+        </div>
+        <div class="inContent">
+          <label class="labelContentIn" for="contentIn">내용</label>
+          <textarea name="" id="contentIn" cols="60" rows="8"></textarea>
+        </div>
+        <div class="nickName">
+          <label class="labelnickName" for="nickname">닉네임</label>
+          <input class="text" type="text" name="nickname" id="nickname">
+        </div>
+        <div class="submitBtn">
+          <button class="submitButton btn btn-outline-dark" onclick="postContent()" type="submit"
+            style="color: azure;">게시하기</button>
+          <button class="backButton btn btn-outline-dark" type="Button" style="color: azure;">돌아가기</button>
+        </div>
+      </div>
     </section>
   </div>
 
