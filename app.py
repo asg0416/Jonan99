@@ -1,5 +1,8 @@
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, url_for, redirect
 import requests
+import jwt
+import hashlib
+from pymongo import MongoClient
 
 app = Flask(__name__)
 
@@ -9,7 +12,18 @@ db = client.dbjonan99
 
 @app.route('/')
 def home():
-   return render_template('index.html')
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+
+        return render_template('index.html')
+    except jwt.ExpiredSignatureError:
+        return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
+    except jwt.exceptions.DecodeError:
+        return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
+    return render_template('index.html')
+
+
 
 
 @app.route('/post_home')
@@ -26,7 +40,31 @@ def post_home():
 
 @app.route('/login')
 def login():
-   return render_template('login.html')
+    msg = request.args.get("msg")
+    return render_template('login.html', msg=msg)
+
+
+@app.route('/sign_in', methods=['POST'])
+def sign_in():
+    # 로그인
+    username_receive = request.form['username_give']
+    password_receive = request.form['password_give']
+
+    pw_hash = hashlib.sha256(password_receive.encode('utf-8')).hexdigest()
+    result = db.users.find_one({'username': username_receive, 'password': pw_hash})
+
+    if result is not None:  #result 찾음
+        payload = {
+            'id': username_receive,
+            'exp': datetime.utcnow() + timedelta(seconds=60 * 60 * 24)  # 로그인 24시간 유지
+        }
+        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
+
+        return jsonify({'result': 'success', 'token': token})
+    # result 못찾음
+    else:
+        return jsonify({'result': 'fail', 'msg': '가입하지 않은 아이디이거나, 잘못된 비밀번호입니다.'})
+
 
 @app.route('/sign_up')
 def sign_up():
@@ -59,13 +97,13 @@ def post_content():
     title_receive = request.form['title_give']
     comment_receive = request.form['comment_give']
     nickname_receive = request.form['nickname_give']
-    
+
     doc = {
         'title': title_receive,
         'comment': comment_receive,
         'nickname': nickname_receive
     }
-    
+
     db.jonan.insert_one(doc)
 
     return jsonify({'msg': '글 작성 완료'})
