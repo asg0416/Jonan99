@@ -41,12 +41,14 @@
                         let title = contents[i]['title']
                         let comment = contents[i]['comment']
                         let nickname = contents[i]['nickname']
+                        let date = contents[i]['date']
 
                         let temp_html = `<div class="card" style="width: 366px;">
                                             <div class="card-body">
                                                 <h5 class="card-title">${title}</h5>
                                                 <h6 class="card-subtitle mb-2 text-muted">${nickname}</h6>
                                                 <p class="card-text">${comment}</p>
+                                                <h6 class="card-subtitle mb-2 text-muted">${date}</h6>
                                                 <div class="post_bottom">
                                                     <button onclick="like()" type="button" class="card-link btn btn-link like_btn">
                                                         <i class="fa fa-thumbs-o-up" aria-hidden="true"> 응원해요 ({{ like }})</i>

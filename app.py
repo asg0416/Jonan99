@@ -7,7 +7,6 @@ from pymongo import MongoClient
 
 app = Flask(__name__)
 
-from pymongo import MongoClient
 client = MongoClient('localhost', 27017)
 db = client.dbjonan99
 
@@ -108,10 +107,14 @@ def post_content():
     comment_receive = request.form['comment_give']
     nickname_receive = request.form['nickname_give']
 
+    today = datetime.now()
+    mytime = today.strftime('%Y년 %m월 %d일 %H시 %M분')
+
     doc = {
         'title': title_receive,
         'comment': comment_receive,
-        'nickname': nickname_receive
+        'nickname': nickname_receive,
+        'date': mytime,
     }
 
     db.jonan.insert_one(doc)
