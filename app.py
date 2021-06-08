@@ -50,5 +50,10 @@ def delete_star():
 
     return jsonify({'msg': '삭제완료'})
 
+@app.route('/api/content', methods=['POST'])
+def post_content():
+
+    return jsonify({'msg': '글 작성 완료'})
+
 
 app.run('0.0.0.0',port=5000,debug=True)
