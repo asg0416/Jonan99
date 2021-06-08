@@ -97,6 +97,11 @@ def delete_star():
 
     return jsonify({'msg': '삭제완료'})
 
+@app.route('/api/content', methods=['GET'])
+def show_post():
+    contents = list(db.jonan.find({}, {'_id': False}))
+    return jsonify({'all_content': contents})
+
 @app.route('/api/content', methods=['POST'])
 def post_content():
     title_receive = request.form['title_give']
