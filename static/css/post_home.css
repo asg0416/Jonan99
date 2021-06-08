@@ -45,6 +45,8 @@
     margin: 10px auto;
     width: 1200px;
     background-color: #bfbfbf;
+    border-radius: 5px;
+    align-items: center;
     opacity: 0.8;
     z-index: 1;
 }
@@ -57,14 +59,26 @@
     margin-bottom: 20px;
 }
 
+
 .cards_columns{
     column-width: 300px;
-    column-gap: normal;
+    column-gap: 35px;
     column-count: auto;
-    column-fill: balance;
 }
 
-.card_bottom{
+.card-columns{
+    display: flex;
+    /*!*justify-content: space-between;*/
+    /*margin: 0 70px;*/
+    margin-top: 35px;
+    flex-wrap: wrap;
+}
+
+.card{
+    border-radius: 5px;
+}
+
+.post_bottom{
     display: block;
     text-align: right;
 }
