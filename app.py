@@ -3,6 +3,7 @@ from flask import Flask, render_template, jsonify, request, session, redirect, u
 
 app = Flask(__name__)
 
+
 from pymongo import MongoClient
 
 client = MongoClient('mongodb://13.124.117.232', 27017, username="test", password="test")
@@ -89,6 +90,7 @@ def delete_star():
     return jsonify({'msg': '삭제완료'})
 
 
+
 #################################
 ##  로그인을 위한 API            ##
 #################################
@@ -107,6 +109,28 @@ def api_sign_up():
     db.user.insert_one({'id': id_receive, 'pw': pw_hash, 'nick': nickname_receive})
 
     return jsonify({'result': 'success'})
+
+
+@app.route('/api/content', methods=['GET'])
+def show_post():
+    contents = list(db.jonan.find({}, {'_id': False}))
+    return jsonify({'all_content': contents})
+
+@app.route('/api/content', methods=['POST'])
+def post_content():
+    title_receive = request.form['title_give']
+    comment_receive = request.form['comment_give']
+    nickname_receive = request.form['nickname_give']
+
+    today = datetime.now()
+    mytime = today.strftime('%Y년 %m월 %d일 %H시 %M분')
+
+    doc = {
+        'title': title_receive,
+        'comment': comment_receive,
+        'nickname': nickname_receive,
+        'date': mytime,
+    }
 
 
 # [로그인 API]
