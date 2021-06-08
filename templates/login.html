@@ -5,23 +5,54 @@
 {% endblock %}
 
 {% block title %}
-    - test home
+    - 로그인 페이지
 {% endblock %}
 
 {% block script %}
     <script>
         function login() {
-
             let login_value = $('#login').val();
             let password_value = $('#password').val();
             if (login_value == '') {
                 alert('아이디를 입력하세요!');
             } else if (password_value == '') {
-                alert('비밀번호를 입력하세요!')
+
+        function sign_in() {
+            let username = $("#input-username").val()
+            let password = $("#input-password").val()
+
+            if (username == "") {
+                alert('아이디를 입력하세요!')
+                $("#input-username").focus()
+                return;
             } else {
-                alert('아이디 비밀번호 입력 완료!');
-                // 누르면 로그인 완료 후 메인페이지로 이동 location.href='pagename.html'
+                $("#help-id-login").text("")
             }
+
+            if (password == "") {
+                alert('비밀번호를 입력하세요!')
+                $("#input-password").focus()
+                return;
+            } else {
+                $("#help-password-login").text("")
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "/sign_in",
+                data: {
+                    username_give: username,
+                    password_give: password
+                },
+                success: function (response) {
+                    if (response['result'] == 'success') {
+                        $.cookie('mytoken', response['token'], {path: '/'});
+                        window.location.replace("/")
+                    } else {
+                        alert(response['msg'])
+                    }
+                }
+            });
         }
     </script>
 {% endblock %}
@@ -41,18 +72,18 @@
                         <div class="input-group ">
                             <div class="input-group mb-3 align-items-center">
                                 <span class="text-centered col-2">ID</span>
-                                <input type="text" class="form-control" id="login" placeholder="아이디를 입력해주세요."
+                                <input type="text" class="form-control" id="input-username" placeholder="아이디를 입력해주세요."
                                        aria-label="Recipient's username" aria-describedby="button-addon2">
                             </div>
                         </div>
                         <div class="input-group ">
                             <div class="input-group mb-3 align-items-center">
                                 <span class="text-centered col-2">PW</span>
-                                <input type="text" class="form-control" id="password" placeholder="비밀번호를 입력해주세요."
+                                <input type="text" class="form-control" id="input-password" placeholder="비밀번호를 입력해주세요."
                                        aria-label="Recipient's username" aria-describedby="button-addon2">
                             </div>
                         </div>
-                        <button type="button" class="btn btn-dark" onclick="login()">
+                        <button type="button" class="btn btn-dark" onclick="sign_in()">
                             로그인
                         </button>
                         <button type="button" class="btn btn-dark" onclick="window.location.href='/sign_up'">
@@ -66,5 +97,3 @@
         </div>
     </div>
 {% endblock %}
-
-
