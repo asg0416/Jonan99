@@ -5,9 +5,9 @@ app = Flask(__name__)
 
 
 from pymongo import MongoClient
-
 client = MongoClient('mongodb://13.124.117.232', 27017, username="test", password="test")
 db = client.JONANTEST
+
 
 # JWT 토큰을 만들 때 필요한 비밀문자열입니다. 아무거나 입력해도 괜찮습니다.
 # 이 문자열은 서버만 알고있기 때문에, 내 서버에서만 토큰을 인코딩(=만들기)/디코딩(=풀기) 할 수 있습니다.
@@ -90,7 +90,6 @@ def delete_star():
     return jsonify({'msg': '삭제완료'})
 
 
-
 #################################
 ##  로그인을 위한 API            ##
 #################################
@@ -113,7 +112,7 @@ def api_sign_up():
 
 @app.route('/api/content', methods=['GET'])
 def show_post():
-    contents = list(db.jonan.find({}, {'_id': False}))
+    contents = list(db.posting.find({}, {'_id': False}))
     return jsonify({'all_content': contents})
 
 @app.route('/api/content', methods=['POST'])
@@ -122,7 +121,7 @@ def post_content():
     comment_receive = request.form['comment_give']
     nickname_receive = request.form['nickname_give']
 
-    today = datetime.now()
+    today = datetime.datetime.now()
     mytime = today.strftime('%Y년 %m월 %d일 %H시 %M분')
 
     doc = {
@@ -132,6 +131,8 @@ def post_content():
         'date': mytime,
     }
 
+    db.posting.insert_one(doc)
+    return jsonify({'msg': '포스팅 완료'})
 
 # [로그인 API]
 # id, pw를 받아서 맞춰보고, 토큰을 만들어 발급합니다.
@@ -154,7 +155,7 @@ def api_login():
         # exp에는 만료시간을 넣어줍니다. 만료시간이 지나면, 시크릿키로 토큰을 풀 때 만료되었다고 에러가 납니다.
         payload = {
             'id': id_receive,
-            'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=60)
+            'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=600)
         }
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
 
