@@ -1,5 +1,5 @@
 ::-webkit-scrollbar {
-  display: none;
+    display: none;
 }
 
 .top {
@@ -15,7 +15,7 @@
     background-image: url("https://hanghae99.spartacodingclub.kr/static/images/main/hero.jpg");
     background-position: top;
     background-size: cover;
-    padding-bottom: 50px;
+    padding-bottom: 50px !important;
 
     min-height: 100vh;
     height: 100%;
@@ -31,8 +31,8 @@
 
 .main_wrap {
     padding: 15px;
-    margin: 10px auto;
-    width: 1200px;
+    margin: 20px 20px 0 20px;
+    width: auto;
     background-color: #bfbfbf;
     border-radius: 5px;
     align-items: center;
@@ -48,18 +48,18 @@
     margin-bottom: 20px;
 }
 
-.post_text{
+.post_text {
     color: red;
     font-size: large;
 }
 
-.cards_columns{
+.cards_columns {
     column-width: 300px;
     column-gap: 35px;
     column-count: auto;
 }
 
-.card-columns{
+.card-columns {
     display: flex;
     /*!*justify-content: space-between;*/
     /*margin: 0 70px;*/
@@ -67,33 +67,49 @@
     flex-wrap: wrap;
 }
 
-.card{
+.card {
     border-radius: 5px;
 }
 
-.post_bottom{
+.post_bottom {
     display: block;
     text-align: right;
 }
 
-.nick_text{
+.nick_text {
     float: left;
 }
 
-.modify_btn{
+.modify_btn {
     font-size: small;
     color: grey;
 }
 
-.delete_btn{
+.delete_btn {
     font-size: small;
     margin-left: 0 !important;
     color: grey;
 }
 
-.like_btn{
+.like_btn {
     float: left;
     font-size: 15px;
     color: red;
     font-family: 'Consolas', 'Deja Vu Sans Mono', 'Bitstream Vera Sans Mono', monospace;
+}
+
+@media ( max-width: 1238px ) {
+    .cards_box {
+        width: 800px;
+        margin: auto;
+    }
+
+}
+
+@media ( max-width: 837px ) {
+    .cards_box {
+        width: 366px;
+        margin: auto;
+    }
+
 }
