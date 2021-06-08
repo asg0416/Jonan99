@@ -12,15 +12,11 @@
 }
 
 .background {
-    /*height: 100vh;*/
-    /*background-image: url("https://hanghae99.spartacodingclub.kr/static/images/main/hero.jpg");*/
-    /*background-position: center;*/
-    /*background-size: cover;*/
-
     background-attachment: fixed;
     background-image: url("https://hanghae99.spartacodingclub.kr/static/images/main/hero.jpg");
     background-position: top;
     background-size: cover;
+    padding-bottom: 50px;
 
     min-height: 100vh;
     height: 100%;
@@ -93,4 +89,5 @@
 
 .delete_btn{
     font-size: small;
+    margin-left: 0 !important;
 }

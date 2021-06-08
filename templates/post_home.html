@@ -26,35 +26,35 @@
 
     <!--  스크립트  -->
     <script>
-        $(document).ready(function () {
-            water_temp();
-            weather();
-        });
 
-        function water_temp() {
+        function logout(id) {
             $.ajax({
-                type: "GET",
-                url: "http://openapi.seoul.go.kr:8088/546c635a6e61736733394979736142/json/WPOSInformationTime/1/5/",
-                data: {},
+                type: 'POST',
+                url: '/api/logout',
+                data: {id_give: id},
                 success: function (response) {
-                    let temp = response['WPOSInformationTime']['row'][0]['W_TEMP']
-                    $('#water_api').text(temp)
+                    alert(response['msg']);
+                    window.location.href="/"
                 }
-            })
+            });
         }
 
-        function weather() {
-            $.ajax({
-                type: "GET",
-                url: "http://api.openweathermap.org/data/2.5/weather?lat=37.56826&lon=126.977829&APPID=8bab5afa1c8be369722bbca48120e0bc",
-                data: {},
-                success: function (response) {
-                    let temp = response['main']['temp'] - 273.15
-                    $('#weather_api').text(temp.toFixed(1))
-                }
-            })
-
+        function go_modify() {
+            window.location.href="/content"
         }
+
+        function go_delete(name) {
+            $.ajax({
+                type: 'POST',
+                url: '/api/delete',
+                data: {name_give: name},
+                success: function (response) {
+                    alert(response['msg']);
+                    window.location.reload()
+                }
+            });
+        }
+
     </script>
 
 </head>
@@ -62,7 +62,7 @@
 <div class="background">
     <div class="top">
          <h1 class="main_title"> 조난 99 </h1>
-        <button type="button" class="btn btn-outline-secondary" id="login_btn">로그아웃</button>
+        <button onclick="logout(id)" type="button" class="btn btn-outline-secondary" id="login_btn">로그아웃</button>
     </div>
 
     <div class="main_wrap">
@@ -70,14 +70,14 @@
             <li class="nav-item">
                 <a class="nav-link water_temp">
                     <p>
-                        한강 수온 : <span id="water_api"> </span>
+                        한강 수온 : <span id="water_api">{{ water_temp }} °C</span>
                     </p>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link weather">
                     <p>
-                        날씨 : <span id="weather_api"> </span>
+                        날씨 : <span id="weather_api">{{ weather_temp|round(1) }} °C</span>
                     </p>
                 </a>
             </li>
@@ -99,10 +99,8 @@
                         <h6 class="card-subtitle mb-2 text-muted">nick name</h6>
                         <p class="card-text">인생 뭘까요 왜 이렇게 어렵죠..</p>
                         <div class="post_bottom">
-                            <a href="/content" class="card-link modify_btn">수정</a>
-                            <a href="#" class="card-link">
-                                <button type="button" class="btn btn-link delete_btn">삭제</button>
-                            </a>
+                            <button onclick="go_modify()" type="button" class="card-link btn btn-link modify_btn">수정</button>
+                            <button onclick="go_delete(name)" type="button" class="card-link btn btn-link delete_btn">삭제</button>
                         </div>
                     </div>
                 </div>
@@ -112,36 +110,8 @@
                         <h6 class="card-subtitle mb-2 text-muted">nick name</h6>
                         <p class="card-text">인생 뭘까요 왜 이렇게 어렵죠..</p>
                         <div class="post_bottom">
-                            <a href="/content" class="card-link modify_btn">수정</a>
-                            <a href="#" class="card-link">
-                                <button type="button" class="btn btn-link delete_btn">삭제</button>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="card" style="width: 366px;">
-                    <div class="card-body">
-                        <h5 class="card-title">아 어렵네요</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">nick name</h6>
-                        <p class="card-text">인생 뭘까요 왜 이렇게 어렵죠..</p>
-                        <div class="post_bottom">
-                            <a href="/content" class="card-link modify_btn">수정</a>
-                            <a href="#" class="card-link">
-                                <button type="button" class="btn btn-link delete_btn">삭제</button>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="card" style="width: 366px;">
-                    <div class="card-body">
-                        <h5 class="card-title">아 어렵네요</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">nick name</h6>
-                        <p class="card-text">인생 뭘까요 왜 이렇게 어렵죠..</p>
-                        <div class="post_bottom">
-                            <a href="/content" class="card-link modify_btn">수정</a>
-                            <a href="#" class="card-link">
-                                <button type="button" class="btn btn-link delete_btn">삭제</button>
-                            </a>
+                            <button onclick="go_modify()" type="button" class="card-link btn btn-link modify_btn">수정</button>
+                            <button onclick="go_delete(name)" type="button" class="card-link btn btn-link delete_btn">삭제</button>
                         </div>
                     </div>
                 </div>
