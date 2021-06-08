@@ -2,7 +2,6 @@
   display: none;
 }
 
-
 .top {
     display: block;
     width: 1200px;
@@ -28,12 +27,6 @@
     text-align: center;
     margin: auto;
     color: red;
-}
-
-#login_btn {
-    display: inline;
-    float: right;
-    margin-top: 5px;
 }
 
 .main_wrap {

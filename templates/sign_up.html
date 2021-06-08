@@ -1,86 +1,74 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <!-- Webpage Title -->
-    <title>Register | Jonan99</title>
+{% extends "jinja_sample/before_login.html" %}
 
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+{% block head %}
+    {{ super() }}
+{% endblock %}
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="../static/css/sign_up.css">
+{% block title %}
+    - test home
+{% endblock %}
+
+
+{% block script %}
     <script type="text/javascript">
         //회원가입 완료
         function register() {
             alert('조난힘든어님, 회원 가입을 축하드립니다');
-            window.location.href = "/login"
+            window.location.href = "/post_home"
             return;
         }
     </script>
-</head>
+{% endblock %}
 
-<body>
+{% block nav %}
+    {{ super() }}
+{% endblock %}
 
-<!-- 상단 타이틀 -->
-<section class="top_tile">
-    <div class="top_title">
-        <h1 class="title">Jonan99</h1>
-        <h3 class="subtitle">항해99 중 조난당한 사람들의 이야기</h3>
-    </div>
-</section>
+{% block body %}
+    <div class="container">
+        <div class="box">
+            <div class="content">
+                <div>
+                    <!-- 회원가입 박스 타이틀 -->
+                    <h1>회원가입</h1>
 
-<!-- 회원가입 박스 -->
-<div class="container">
-    <div class="box">
-        <div class="content">
-            <div>
-                <!-- 회원가입 박스 타이틀 -->
-                <h1>회원가입</h1>
-
-                <!-- 아이디 -->
-                <div class="input-group ">
-                    <div class="input-group mb-3 align-items-center">
-                        <span class="text-centered col-2">아이디</span>
-                        <input type="text" class="form-control" id="id_input" placeholder="ID를 입력하세요!"
-                               aria-label="Recipient's username" aria-describedby="button-addon2">
-                        <span>
+                    <!-- 아이디 -->
+                    <div class="input-group ">
+                        <div class="input-group mb-3 align-items-center">
+                            <span class="text-centered col-2">아이디</span>
+                            <input type="text" class="form-control" id="id_input" placeholder="ID를 입력하세요!"
+                                   aria-label="Recipient's username" aria-describedby="button-addon2">
+                            <span>
                             <button class="btn btn-outline-secondary" type="button" id="button-addon2"
                                     onclick="alert('중복된 아이디가 없습니다')">중복확인</button>
                             </span>
+                        </div>
                     </div>
-                </div>
 
-                <!-- 비밀번호 -->
-                <div class="input-group ">
-                    <div class="input-group mb-3 align-items-center">
-                        <span class="text-centered col-2">비밀번호</span>
-                        <input type="text" class="form-control" id="id_input" placeholder="영문+숫자 조합 6자리 이상으로 입력하세요!"
-                               aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <!-- 비밀번호 -->
+                    <div class="input-group ">
+                        <div class="input-group mb-3 align-items-center">
+                            <span class="text-centered col-2">비밀번호</span>
+                            <input type="text" class="form-control" id="id_input" placeholder="영문+숫자 조합 6자리 이상으로 입력하세요!"
+                                   aria-label="Recipient's username" aria-describedby="button-addon2">
+                        </div>
                     </div>
-                </div>
 
-                <!-- 비밀번호확인 -->
-                <div class="input-group ">
-                    <div class="input-group mb-3 align-items-center">
-                        <span class="text-centered col-2">비밀번호 확인</span>
-                        <input type="text" class="form-control" id="id_input" placeholder="ID를 입력하세요!"
-                               aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <!-- 비밀번호확인 -->
+                    <div class="input-group ">
+                        <div class="input-group mb-3 align-items-center">
+                            <span class="text-centered col-2">비밀번호 확인</span>
+                            <input type="text" class="form-control" id="id_input" placeholder="ID를 입력하세요!"
+                                   aria-label="Recipient's username" aria-describedby="button-addon2">
+                        </div>
                     </div>
+
+                    <!-- 가입하기 버튼 -->
+                    <button type="button" class="btn btn-dark" onclick="register()">회원가입</button>
+                    <button type="button" class="btn btn-dark" onclick="location.href='/login'">취소</button>
+
                 </div>
-
-                <!-- 가입하기 버튼 -->
-                <button type="button" class="btn btn-dark" onclick="register()">회원가입</button>
-                <button type="button" class="btn btn-dark" onclick="location.href='/login'">취소</button>
-
             </div>
         </div>
     </div>
-</div>
-<!-- End of 회원가입 박스  -->
-
-</body>
-</html>
+{% endblock %}

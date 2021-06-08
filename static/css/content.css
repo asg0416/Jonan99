@@ -1,97 +1,115 @@
+::-webkit-scrollbar {
+    display: none;
+}
+
 .navbar {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgb(0, 0, 0, 0.9);
+    display: block;
+    align-items: center;
+    background-color: rgb(0, 0, 0, 0.9);
+}
+
+.navbar_logo {
+    display: block;
+    text-align: center;
+    position: relative;
+}
+
+#logout_btn {
+    float: right;
+    justify-content: center;
+    margin-top: 5px;
+    position: absolute;
+    right: 50px;
+    bottom: 30px;
 }
 
 a {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 .backImg {
-  padding-top: 15px;
-  height: 100%;
-  min-height: 100vh;
-  background-image: url("https://hanghae99.spartacodingclub.kr/static/images/main/hero.jpg");
-  background-position: center;
-  background-size: cover;
-  z-index: -1;
+    padding-top: 15px;
+    height: 100%;
+    min-height: 100vh;
+    background-image: url("https://hanghae99.spartacodingclub.kr/static/images/main/hero.jpg");
+    background-position: center;
+    background-size: cover;
+    z-index: -1;
 }
 
 .contentMain {
-  display: flex;
-  justify-content: center;
-  width: 800px;
-  height: 700px;
-  border: 1px solid whitesmoke;
+    display: flex;
+    justify-content: center;
+    width: 800px;
+    height: 700px;
+    border: 1px solid whitesmoke;
 }
 
 .labelTitle {
-  margin-bottom: 1px;
-  display: block;
-  color: azure;
-  padding: 4px;
+    margin-bottom: 1px;
+    display: block;
+    color: azure;
+    padding: 4px;
 }
 
 .labelContentIn {
-  margin-bottom: 1px;
-  display: block;
-  color: azure;
-  padding: 4px;
+    margin-bottom: 1px;
+    display: block;
+    color: azure;
+    padding: 4px;
 }
 
 .labelnickName {
-  margin-bottom: 1px;
-  display: block;
-  color: azure;
-  padding: 4px;
+    margin-bottom: 1px;
+    display: block;
+    color: azure;
+    padding: 4px;
 }
 
 .wrap {
-  width: 800px;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  flex-direction: column;
+    width: 800px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
 }
 
 input {
-  text-align: center;
-  width: 500px;
+    text-align: center;
+    width: 500px;
 }
 
 .submitButton {
-  margin: 0 100px;
+    margin: 0 100px;
 }
 
 .backButton {
-  margin: 0 100px;
+    margin: 0 100px;
 }
 
 .inContent {
-  width: 500px;
+    width: 500px;
 }
 
 .introduceText {
-  color: beige;
+    color: beige;
 }
 
 #contentIn {
-  resize: none;
-  padding-top: 10px;
-  padding-left: 14px;
-  background-color: rgb(235, 241, 241);
-  border: azure;
+    resize: none;
+    padding-top: 10px;
+    padding-left: 14px;
+    background-color: rgb(235, 241, 241);
+    border: azure;
 }
 
 #title {
-  padding: 5px 0px;
-  background-color: rgb(235, 241, 241);
+    padding: 5px 0px;
+    background-color: rgb(235, 241, 241);
 }
 
 #nickname {
-  padding: 5px 0px;
-  background-color: rgb(235, 241, 241);
+    padding: 5px 0px;
+    background-color: rgb(235, 241, 241);
 }

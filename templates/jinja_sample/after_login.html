@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+              crossorigin="anonymous">
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+                crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+                crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="../../static/css/content.css">
+        <link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css' rel='stylesheet' type='text/css'>
+
+        <title>조난99{% block title %}{% endblock %}</title>
+
+        <!-- 기존 CSS -->
+        <link rel="stylesheet" href="../../static/css/post_home.css">
+        <link rel="stylesheet" href="../../static/css/content.css">
+        <link rel="stylesheet" href="../static/css/index.css">
+
+        <!-- <link rel="stylesheet" href="../static/css/sign_up.css"> -->
+
+        {% block logout %}
+            <script>
+                function logout(id) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/api/logout',
+                        data: {id_give: id},
+                        success: function (response) {
+                            alert(response['msg']);
+                            window.location.href = "/"
+                        }
+                    });
+                }
+            </script>
+        {% endblock %}
+
+        {% block script %}
+            <script>
+
+            </script>
+        {% endblock %}
+    {% endblock %}
+</head>
+<body>
+{% block nav %}
+    <nav class="navbar">
+        <div class="navbar_logo">
+            <a href="#">
+                <img src="../../static/img/logo.png" alt="logo">
+            </a>
+            <button onclick="logout(id)" type="button" class="btn btn-outline-secondary" id="logout_btn">로그아웃</button>
+        </div>
+    </nav>
+{% endblock %}
+
+<div class="backImg">
+    {% block body %}
+    {% endblock %}
+</div>
+
+</body>
+</html>

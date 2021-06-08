@@ -2,75 +2,79 @@
 @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
 
 * {
-  font-family: 'Jua', sans-serif;
+    font-family: 'Jua', sans-serif;
 }
 
 .title {
     font-weight: 800;
     font-size: 80px;
     color: black;
-  }
+}
 
-  .subtitle {
-    font-size: 32px;
-    color: rgb(30, 65, 180);
-  }
+.subtitle {
+    text-align: center;
+    font-style: italic;
+    font-size: 26px;
+    color: rgb(226, 226, 226);
+}
 
-  .top_tile {
+.top_tile {
     background-color: #FF5833;
-  }
+}
 
-  body {
+body {
     /* background-image: url('/static/.png'); */
     background-color: aliceblue;
-    min-height: 1200px;
-  }
+    min-height: 100vh;
+}
 
- .container{
-     margin-top: 200px;
- }
+.container {
+    position: relative;
+    top: 20px;
+}
 
- .box{
-     background-color: grey;
-     max-width: 800px;
-     margin: 0 auto;
-     border: 2px solid black;
-     border-radius: 15px;
-     padding: 40px;
- }
+.box {
+    background-color: #bfbfbf;
+    opacity: 0.8;
+    max-width: 800px;
+    margin: 0 auto;
+    border: 2px solid black;
+    border-radius: 15px;
+    padding: 25px;
+}
 
- .content{
-     text-align: center;
-     margin-top: 20px;
- }
+.content {
+    text-align: center;
+    margin-top: 20px;
+}
 
- .input-group{
-     max-width: 740px;
-     margin-top: 20px;
- }
+.input-group {
+    max-width: 740px;
+    margin-top: 5px;
+}
 
- .text-centered{
-     text-align: center;
- }
+.text-centered {
+    text-align: center;
+}
 
- .btn {
+.btn {
     width: 100px;
     height: 50px;
     color: white;
     background-color: black;
-  }
+}
 
- input{
+input {
     height: 50px;
     margin-right: 20px;
- }
+}
 
- .form-control{
+.form-control {
     border: black 2px solid;
- }
+}
 
- .btn-dark{
-     margin-top: 20px;
-     margin-right: 30px;
-     margin-left: 30px;
- }
+.btn-dark {
+    margin-top: 20px;
+    margin-right: 30px;
+    margin-left: 30px;
+}

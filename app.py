@@ -14,9 +14,11 @@ def post_home():
     water_response = water.json()
     water_temp = water_response['WPOSInformationTime']['row'][0]['W_TEMP']
 
-    weather = requests.get('http://api.openweathermap.org/data/2.5/weather?lat=37.56826&lon=126.977829&APPID=8bab5afa1c8be369722bbca48120e0bc')
+    weather = requests.get(
+        'http://api.openweathermap.org/data/2.5/weather?lat=37.56826&lon=126.977829&APPID=8bab5afa1c8be369722bbca48120e0bc')
     weather_response = weather.json()
     weather_temp = weather_response['main']['temp'] - 273.15
+
     return render_template('post_home.html', water_temp=water_temp, weather_temp=weather_temp)
 
 
@@ -24,9 +26,11 @@ def post_home():
 def login():
    return render_template('login.html')
 
+
 @app.route('/sign_up')
 def sign_up():
    return render_template('sign_up.html')
+
 
 @app.route('/content')
 def content():

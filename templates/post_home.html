@@ -1,48 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+{% extends "jinja_sample/after_login.html" %}
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-          crossorigin="anonymous">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+{% block head %}
+    {{ super() }}
+{% endblock %}
 
+{% block title %}
+    - test home
+{% endblock %}
 
-    <!-- JS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-            crossorigin="anonymous"></script>
-
-    <!-- 구글폰트 -->
-    <link href="https://fonts.googleapis.com/css?family=Stylish&display=swap" rel="stylesheet">
-
-
-    <title>조난99</title>
-
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="../static/css/post_home.css">
-
-    <!--  스크립트  -->
+{% block script %}
     <script>
-
-        function logout(id) {
-            $.ajax({
-                type: 'POST',
-                url: '/api/logout',
-                data: {id_give: id},
-                success: function (response) {
-                    alert(response['msg']);
-                    window.location.href="/"
-                }
-            });
-        }
-
         function go_modify() {
-            window.location.href="/content"
+            window.location.href = "/content"
         }
 
         function go_delete(name) {
@@ -56,17 +25,14 @@
                 }
             });
         }
-
     </script>
+{% endblock %}
 
-</head>
-<body>
-<div class="background">
-    <div class="top">
-         <h1 class="main_title"> 조난 99 </h1>
-        <button onclick="logout(id)" type="button" class="btn btn-outline-secondary" id="login_btn">로그아웃</button>
-    </div>
+{% block nav %}
+    {{ super() }}
+{% endblock %}
 
+{% block body %}
     <div class="main_wrap">
         <ul class="nav nav-pills nav-fill menu_nav">
             <li class="nav-item">
@@ -104,8 +70,11 @@
                             <button onclick="like()" type="button" class="card-link btn btn-link like_btn">
                                 <i class="fa fa-thumbs-o-up" aria-hidden="true"> 응원해요 ({{ like }})</i>
                             </button>
-                            <button onclick="go_modify()" type="button" class="card-link btn btn-link modify_btn">수정</button>
-                            <button onclick="go_delete(name)" type="button" class="card-link btn btn-link delete_btn">삭제</button>
+                            <button onclick="go_modify()" type="button" class="card-link btn btn-link modify_btn">수정
+                            </button>
+                            <button onclick="go_delete(name)" type="button" class="card-link btn btn-link delete_btn">
+                                삭제
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -118,8 +87,11 @@
                             <button onclick="like()" type="button" class="card-link btn btn-link like_btn">
                                 <i class="fa fa-thumbs-o-up" aria-hidden="true"> 응원해요 ({{ like }})</i>
                             </button>
-                            <button onclick="go_modify()" type="button" class="card-link btn btn-link modify_btn">수정</button>
-                            <button onclick="go_delete(name)" type="button" class="card-link btn btn-link delete_btn">삭제</button>
+                            <button onclick="go_modify()" type="button" class="card-link btn btn-link modify_btn">수정
+                            </button>
+                            <button onclick="go_delete(name)" type="button" class="card-link btn btn-link delete_btn">
+                                삭제
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -132,8 +104,11 @@
                             <button onclick="like()" type="button" class="card-link btn btn-link like_btn">
                                 <i class="fa fa-thumbs-o-up" aria-hidden="true"> 응원해요 ({{ like }})</i>
                             </button>
-                            <button onclick="go_modify()" type="button" class="card-link btn btn-link modify_btn">수정</button>
-                            <button onclick="go_delete(name)" type="button" class="card-link btn btn-link delete_btn">삭제</button>
+                            <button onclick="go_modify()" type="button" class="card-link btn btn-link modify_btn">수정
+                            </button>
+                            <button onclick="go_delete(name)" type="button" class="card-link btn btn-link delete_btn">
+                                삭제
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -146,8 +121,11 @@
                             <button onclick="like()" type="button" class="card-link btn btn-link like_btn">
                                 <i class="fa fa-thumbs-o-up" aria-hidden="true"> 응원해요 ({{ like }})</i>
                             </button>
-                            <button onclick="go_modify()" type="button" class="card-link btn btn-link modify_btn">수정</button>
-                            <button onclick="go_delete(name)" type="button" class="card-link btn btn-link delete_btn">삭제</button>
+                            <button onclick="go_modify()" type="button" class="card-link btn btn-link modify_btn">수정
+                            </button>
+                            <button onclick="go_delete(name)" type="button" class="card-link btn btn-link delete_btn">
+                                삭제
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -155,6 +133,4 @@
         </div>
 
     </div>
-</div>
-</body>
-</html>
+{% endblock %}
