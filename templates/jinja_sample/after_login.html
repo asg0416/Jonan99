@@ -16,12 +16,16 @@
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
                 integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
                 crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
                 integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
                 crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
+
         <link rel="stylesheet" href="../../static/css/content.css">
         <link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css' rel='stylesheet' type='text/css'>
 
@@ -36,16 +40,11 @@
 
         {% block logout %}
             <script>
-                function logout(id) {
-                    $.ajax({
-                        type: 'POST',
-                        url: '/api/logout',
-                        data: {id_give: id},
-                        success: function (response) {
-                            alert(response['msg']);
-                            window.location.href = "/"
-                        }
-                    });
+                // 로그아웃은 내가 가지고 있는 토큰만 쿠키에서 없애면 됩니다.
+                function logout() {
+                    $.removeCookie('mytoken');
+                    alert('로그아웃!')
+                    window.location.href = '/'
                 }
             </script>
         {% endblock %}
@@ -64,7 +63,7 @@
             <a href="#">
                 <img src="../../static/img/logo.png" alt="logo">
             </a>
-            <button onclick="logout(id)" type="button" class="btn btn-outline-secondary" id="logout_btn">로그아웃</button>
+            <button onclick="logout()" type="button" class="btn btn-outline-secondary" id="logout_btn">로그아웃</button>
         </div>
     </nav>
 {% endblock %}

@@ -5,54 +5,38 @@
 {% endblock %}
 
 {% block title %}
-    - 로그인 페이지
+    - test home
 {% endblock %}
 
 {% block script %}
     <script>
+        {% if msg %}
+            alert("{{ msg }}")
+        {% endif %}
+        // ['쿠키'라는 개념에 대해 알아봅시다]
+        // 로그인을 구현하면, 반드시 쿠키라는 개념을 사용합니다.
+        // 페이지에 관계없이 브라우저에 임시로 저장되는 정보입니다. 키:밸류 형태(딕셔너리 형태)로 저장됩니다.
+        // 쿠키가 있기 때문에, 한번 로그인하면 네이버에서 다시 로그인할 필요가 없는 것입니다.
+        // 브라우저를 닫으면 자동 삭제되게 하거나, 일정 시간이 지나면 삭제되게 할 수 있습니다.
         function login() {
-            let login_value = $('#login').val();
-            let password_value = $('#password').val();
-            if (login_value == '') {
-                alert('아이디를 입력하세요!');
-            } else if (password_value == '') {
-
-        function sign_in() {
-            let username = $("#input-username").val()
-            let password = $("#input-password").val()
-
-            if (username == "") {
-                alert('아이디를 입력하세요!')
-                $("#input-username").focus()
-                return;
-            } else {
-                $("#help-id-login").text("")
-            }
-
-            if (password == "") {
-                alert('비밀번호를 입력하세요!')
-                $("#input-password").focus()
-                return;
-            } else {
-                $("#help-password-login").text("")
-            }
-
             $.ajax({
                 type: "POST",
-                url: "/sign_in",
-                data: {
-                    username_give: username,
-                    password_give: password
-                },
+                url: "/api/login",
+                data: {id_give: $('#userid').val(), pw_give: $('#userpw').val()},
                 success: function (response) {
                     if (response['result'] == 'success') {
-                        $.cookie('mytoken', response['token'], {path: '/'});
-                        window.location.replace("/")
+                        // 로그인이 정상적으로 되면, 토큰을 받아옵니다.
+                        // 이 토큰을 mytoken이라는 키 값으로 쿠키에 저장합니다.
+                        $.cookie('mytoken', response['token']);
+
+                        alert('로그인 완료!')
+                        window.location.href = '/post_home'
                     } else {
+                        // 로그인이 안되면 에러메시지를 띄웁니다.
                         alert(response['msg'])
                     }
                 }
-            });
+            })
         }
     </script>
 {% endblock %}
@@ -63,37 +47,37 @@
 
 {% block body %}
     <div class="container">
-    <div class="box">
-        <div class="content">
-            <div>
-                <h1>로그인</h1>
-                <div class="big_login_box">
-                    <div class="input-group mb-3" id="login-box">
-                        <div class="input-group ">
-                            <div class="input-group mb-3 align-items-center">
-                                <span class="text-centered col-2">ID</span>
-                                <input type="text" class="form-control" id="input-username" placeholder="아이디를 입력해주세요."
-                                       aria-label="Recipient's username" aria-describedby="button-addon2">
+        <div class="box">
+            <div class="content">
+                <div>
+                    <h1>로그인</h1>
+                    <div class="big_login_box">
+                        <div class="input-group mb-3" id="login-box">
+                            <div class="input-group ">
+                                <div class="input-group mb-3 align-items-center">
+                                    <label class="text-centered col-2" for="userid">ID</label>
+                                    <input type="text" class="form-control" id="userid" placeholder="아이디를 입력해주세요."
+                                           aria-label="Recipient's username" aria-describedby="button-addon2">
+                                </div>
                             </div>
-                        </div>
-                        <div class="input-group ">
-                            <div class="input-group mb-3 align-items-center">
-                                <span class="text-centered col-2">PW</span>
-                                <input type="text" class="form-control" id="input-password" placeholder="비밀번호를 입력해주세요."
-                                       aria-label="Recipient's username" aria-describedby="button-addon2">
+                            <div class="input-group ">
+                                <div class="input-group mb-3 align-items-center">
+                                    <label class="text-centered col-2" for="userpw">PW</label>
+                                    <input type="text" class="form-control" id="userpw" placeholder="비밀번호를 입력해주세요."
+                                           aria-label="Recipient's username" aria-describedby="button-addon2">
+                                </div>
                             </div>
-                        </div>
-                        <button type="button" class="btn btn-dark" onclick="sign_in()">
-                            로그인
-                        </button>
-                        <button type="button" class="btn btn-dark" onclick="window.location.href='/sign_up'">
-                            회원가입
-                        </button>
+                            <button type="button" class="btn btn-dark" onclick="login()">
+                                로그인
+                            </button>
+                            <button type="button" class="btn btn-dark" onclick="window.location.href='/sign_up'">
+                                회원가입
+                            </button>
 
+                        </div>
                     </div>
-                </div>
 
+                </div>
             </div>
         </div>
-    </div>
 {% endblock %}
