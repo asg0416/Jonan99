@@ -56,6 +56,17 @@ def delete_star():
 
 @app.route('/api/content', methods=['POST'])
 def post_content():
+    title_receive = request.form['title_give']
+    comment_receive = request.form['comment_give']
+    nickname_receive = request.form['nickname_give']
+    
+    doc = {
+        'title': title_receive,
+        'comment': comment_receive,
+        'nickname': nickname_receive
+    }
+
+    db.jonan.insert_one(doc)
 
     return jsonify({'msg': '글 작성 완료'})
 
