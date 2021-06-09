@@ -4,7 +4,7 @@ from flask import Flask, render_template, jsonify, request, session, redirect, u
 app = Flask(__name__)
 
 from pymongo import MongoClient
-
+# client = MongoClient('localhost', 27017)
 client = MongoClient('mongodb://13.124.117.232', 27017, username="test", password="test")
 db = client.JONANTEST
 
@@ -140,14 +140,11 @@ def post_content():
     comment_receive = request.form['comment_give']
     nickname_receive = request.form['nickname_give']
 
-    today = datetime.datetime.now()
-    mytime = today.strftime('%Y년 %m월 %d일 %H시 %M분')
 
     doc = {
         'title': title_receive,
         'comment': comment_receive,
         'nickname': nickname_receive,
-        'date': mytime,
     }
 
     db.posting.insert_one(doc)
