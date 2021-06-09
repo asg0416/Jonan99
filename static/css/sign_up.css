@@ -48,6 +48,21 @@ body {
     margin-top: 20px;
 }
 
+.pwcheck_box{
+    margin-bottom: 5px;
+}
+
+.pwcheck{
+    text-align: left;
+    font-style: italic;
+    font-size: 15px;
+    width: 200px;
+    position: absolute;
+    bottom: -28px;
+    left: 130px;
+}
+
+
 .input-group {
     max-width: 740px;
     margin-top: 5px;
