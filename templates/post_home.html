@@ -36,31 +36,31 @@
                 url: "/api/content",
                 data: {},
                 success: function (response) {
-                    let contents = response['all_content']
-                    for (let i = 0; i < contents.length; i++) {
-                        let title = contents[i]['title']
-                        let comment = contents[i]['comment']
-                        let nickname = contents[i]['nickname']
-
-                        let temp_html = `<div class="card" style="width: 366px;">
-                                            <div class="card-body">
-                                                <h5 class="card-title">${title}</h5>
-                                                <h6 class="card-subtitle mb-2 text-muted">${nickname}</h6>
-                                                <p class="card-text">${comment}</p>
-                                                <h6 class="card-subtitle mb-2 text-muted date">날짜프론트에서하는걸로할게요</h6>
-                                                <div class="post_bottom">
-                                                    <button onclick="like()" type="button" class="card-link btn btn-link like_btn">
-                                                        <i class="fa fa-thumbs-o-up" aria-hidden="true"> 응원해요 ({{ like }})</i>
-                                                    </button>
-                                                    <button onclick="go_modify()" type="button" class="card-link btn btn-link modify_btn">수정
-                                                    </button>
-                                                    <button onclick="go_delete(name)" type="button" class="card-link btn btn-link delete_btn">
-                                                        삭제
-                                                    </button>
+                    if (response['result'] == 'success') {
+                        let contents = response['all_content']
+                        for (let i = 0; i < contents.length; i++) {
+                            let content = contents[i]
+                            let time_post = new Date(content["date"])
+                            let temp_html = `<div class="card" id="${content['_id']}" style="width: 366px;">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">${content['title']}</h5>
+                                                    <h6 class="card-subtitle mb-2 text-muted">${content['nickname']}</h6>
+                                                    <p class="card-text">${content['comment']}</p>
+                                                    <h6 class="card-subtitle mb-2 text-muted date">${time_post}</h6>
+                                                    <div class="post_bottom">
+                                                        <button onclick="like()" type="button" class="card-link btn btn-link like_btn">
+                                                            <i class="fa fa-thumbs-o-up" aria-hidden="true"> 응원해요 ({{ like }})</i>
+                                                        </button>
+                                                        <button onclick="go_modify()" type="button" class="card-link btn btn-link modify_btn">수정
+                                                        </button>
+                                                        <button onclick="go_delete(name)" type="button" class="card-link btn btn-link delete_btn">
+                                                            삭제
+                                                        </button>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>`
-                        $('#posting_box').append(temp_html)
+                                            </div>`
+                            $('#posting_box').append(temp_html)
+                        }
                     }
                 }
             })
