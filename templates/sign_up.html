@@ -11,26 +11,6 @@
 
 {% block script %}
     <script>
-        function register() {
-            $.ajax({
-                type: "POST",
-                url: "/api/sign_up",
-                data: {
-                    id_give: $('#userid').val(),
-                    pw_give: $('#userpw').val(),
-                    nickname_give: $('#usernick').val()
-                },
-                success: function (response) {
-                    if (response['result'] == 'success') {
-                        alert('회원가입이 완료되었습니다.')
-                        window.location.href = '/login'
-                    } else {
-                        alert(response['msg'])
-                    }
-                }
-            })
-        }
-
         <!--     아이디 중복확인 함수     -->
         function id_overlap_check() {
             $.ajax({
@@ -43,11 +23,41 @@
                     if (response['result'] == 'success') {
                         alert(response['msg'])
                     } else {
+
                         alert(response['msg'])
                     }
                 }
             })
         }
+
+
+        let count = false
+        function id_count() {
+            count = true
+        }
+
+        function register() {
+            $.ajax({
+                type: "POST",
+                url: "/api/sign_up",
+                data: {
+                    id_give: $('#userid').val(),
+                    pw_give: $('#userpw').val(),
+                    pw2_give: $('#userpw_check').val(),
+                    nickname_give: $('#usernick').val(),
+                    id_count: count,
+                },
+                success: function (response) {
+                    if (response['result'] == 'success') {
+                        alert('회원가입이 완료되었습니다.')
+                        window.location.href = '/login'
+                    } else {
+                        alert(response['msg'])
+                    }
+                }
+            })
+        }
+
     </script>
 {% endblock %}
 
@@ -71,7 +81,7 @@
                                    aria-label="Recipient's username" aria-describedby="button-addon2">
                             <span>
                             <button class="btn btn-outline-secondary" type="button" id="button-addon2"
-                                    onclick="id_overlap_check()">중복확인</button>
+                                    onclick="id_overlap_check(), id_count()">중복확인</button>
                             </span>
                         </div>
                     </div>
