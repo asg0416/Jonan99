@@ -11,6 +11,8 @@
 
 {% block script %}
     <script>
+        $(document).ready(function pwcheck() {});
+
         <!--     아이디 중복확인 함수     -->
         function id_overlap_check() {
             $.ajax({
@@ -23,7 +25,6 @@
                     if (response['result'] == 'success') {
                         alert(response['msg'])
                     } else {
-
                         alert(response['msg'])
                     }
                 }
@@ -31,20 +32,82 @@
         }
 
 
+        function foucus() {
+            return $('#userpw').val('').focus()
+        }
+
         let count = false
         function id_count() {
             count = true
         }
 
+        {###############################################}
+
+
+
+        <!--  비밀번호 일치/불일치 표시  -->
+        $(function pwcheck () {
+            $('#chkNotice').html('');
+            $('#userpw').keyup(function () {
+                if ($('#userpw_check').val()) {
+                    if ($('#userpw').val() != $('#userpw_check').val()) {
+                        $('#chkNotice').html('비밀번호 일치하지 않음');
+                        $('#chkNotice').css('color', '#FF3605');
+                    } else {
+                        $('#chkNotice').html('비밀번호 일치함');
+                        $('#chkNotice').css('color', '#1f5fff');
+                    }
+                }
+            });
+
+            $('#userpw_check').keyup(function () {
+
+                if ($('#userpw').val() != $('#userpw_check').val()) {
+                    $('#chkNotice').html('비밀번호 일치하지 않음');
+                    $('#chkNotice').css('color', '#FF3605');
+                } else {
+                    $('#chkNotice').html('비밀번호 일치함');
+                    $('#chkNotice').css('color', '#1f5fff');
+                }
+
+            });
+        });
+
+        {###############################################}
+
         function register() {
+            let nick = $('#usernick').val();
+            let userid = $('#userid').val();
+            let pwd1 = $('#userpw').val();
+            let pwd2 = $('#userpw_check').val();
+
+            //빈칸이 있을 시에 alert
+            if (nick == '' || userid == '' || pwd1 == '' || pwd2 == '') {
+                alert('빈 항목을 작성해주세요!')
+                return;
+            }
+
+            //비밀번호가 일치하지 않는 경우
+            if (pwd1 != pwd2) {
+                alert('비밀번호가 일치하지 않습니다!')
+                $('#userpw').val('').focus()
+                return;
+            }
+            //비밀번호 조건 검사(숫자+영어 6자 이상)
+            let regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z!@#$%^&*]{6,}$/;
+            if (!regExp.test(pwd1)) {
+                alert("비밀번호는 영문+숫자 6자리 이상이어야 합니다.")
+                $('#userpw_check').val('');
+                $('#userpw').val('').focus();
+                return;
+            }
             $.ajax({
                 type: "POST",
                 url: "/api/sign_up",
                 data: {
-                    id_give: $('#userid').val(),
-                    pw_give: $('#userpw').val(),
-                    pw2_give: $('#userpw_check').val(),
-                    nickname_give: $('#usernick').val(),
+                    id_give: userid,
+                    pw_give: pwd1,
+                    nickname_give: nick,
                     id_count: count,
                 },
                 success: function (response) {
@@ -54,6 +117,7 @@
                     } else {
                         alert(response['msg'])
                     }
+
                 }
             })
         }
@@ -96,13 +160,17 @@
                     </div>
 
                     <!-- 비밀번호확인 -->
-                    <div class="input-group ">
+                    <div class="input-group pwcheck_box">
                         <div class="input-group mb-3 align-items-center">
                             <label class="text-centered col-2" for="userpw_check">비밀번호 확인</label>
                             <input type="text" class="form-control" id="userpw_check" placeholder="ID를 입력하세요!"
                                    aria-label="Recipient's username" aria-describedby="button-addon2">
+                            <div class="pwcheck" id="chkNotice" size="2"></div>
                         </div>
                     </div>
+
+                    <!-- pwcheck -->
+
 
                     <!-- nickname -->
                     <div class="input-group ">

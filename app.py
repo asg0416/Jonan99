@@ -99,7 +99,6 @@ def delete_star():
 def api_sign_up():
     id_receive = request.form['id_give']
     pw_receive = request.form['pw_give']
-    pw2_receive = request.form['pw2_give']
     nickname_receive = request.form['nickname_give']
     id_count_receive = request.form['id_count']
     result = db.user.find_one({'id': id_receive})
@@ -108,9 +107,6 @@ def api_sign_up():
 
     if id_count_receive != 'true':
         return jsonify({'result': 'fail', 'msg': '아이디 중복확인을 해주세요.'})
-
-    elif id_receive == '' or pw_receive == '' or pw2_receive == '' or nickname_receive == '':
-        return jsonify({'result': 'fail', 'msg': '빈칸을 입력해주세요.'})
 
     elif result is not None:
         return jsonify({'result': 'fail', 'msg': '아이디를 확인해주세요.'})
