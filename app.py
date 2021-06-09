@@ -3,11 +3,10 @@ from flask import Flask, render_template, jsonify, request, session, redirect, u
 
 app = Flask(__name__)
 
-
 from pymongo import MongoClient
+
 client = MongoClient('mongodb://13.124.117.232', 27017, username="test", password="test")
 db = client.JONANTEST
-
 
 # JWT 토큰을 만들 때 필요한 비밀문자열입니다. 아무거나 입력해도 괜찮습니다.
 # 이 문자열은 서버만 알고있기 때문에, 내 서버에서만 토큰을 인코딩(=만들기)/디코딩(=풀기) 할 수 있습니다.
@@ -47,13 +46,12 @@ def post_home():
             'http://api.openweathermap.org/data/2.5/weather?lat=37.56826&lon=126.977829&APPID=8bab5afa1c8be369722bbca48120e0bc')
         weather_response = weather.json()
         weather_temp = weather_response['main']['temp'] - 273.15
-        return render_template('post_home.html', nickname=user_info["nick"], water_temp=water_temp, weather_temp=weather_temp)
+        return render_template('post_home.html', nickname=user_info["nick"], water_temp=water_temp,
+                               weather_temp=weather_temp)
     except jwt.ExpiredSignatureError:
         return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
     except jwt.exceptions.DecodeError:
         return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
-
-
 
 
 @app.route('/login')
@@ -110,10 +108,24 @@ def api_sign_up():
     return jsonify({'result': 'success'})
 
 
+@app.route('/api/id_overlap', methods=['POST'])
+def id_overlap():
+    id_receive = request.form['id_give']
+    result = db.user.find_one({'id': id_receive})
+
+    if id_receive == '':
+        return jsonify({'result': 'fail', 'msg': '아이디를 입력해주세요'})
+    elif result is not None:
+        return jsonify({'result': 'fail', 'msg': '존재하는 아이디 입니다.'})
+    else:
+        return jsonify({'result': 'success', 'msg': '회원가입이 가능한 아이디입니다.'})
+
+
 @app.route('/api/content', methods=['GET'])
 def show_post():
     contents = list(db.posting.find({}, {'_id': False}))
     return jsonify({'all_content': contents})
+
 
 @app.route('/api/content', methods=['POST'])
 def post_content():
@@ -133,6 +145,7 @@ def post_content():
 
     db.posting.insert_one(doc)
     return jsonify({'msg': '포스팅 완료'})
+
 
 # [로그인 API]
 # id, pw를 받아서 맞춰보고, 토큰을 만들어 발급합니다.

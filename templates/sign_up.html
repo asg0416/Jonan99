@@ -31,7 +31,23 @@
             })
         }
 
-    {#    function pw check   비번 입력값 확인 함수 필요     #}
+        <!--     아이디 중복확인 함수     -->
+        function id_overlap_check() {
+            $.ajax({
+                type: "POST",
+                url: "/api/id_overlap",
+                data: {
+                    id_give: $('#userid').val(),
+                },
+                success: function (response) {
+                    if (response['result'] == 'success') {
+                        alert(response['msg'])
+                    } else {
+                        alert(response['msg'])
+                    }
+                }
+            })
+        }
     </script>
 {% endblock %}
 
@@ -55,7 +71,7 @@
                                    aria-label="Recipient's username" aria-describedby="button-addon2">
                             <span>
                             <button class="btn btn-outline-secondary" type="button" id="button-addon2"
-                                    onclick="alert('중복된 아이디가 없습니다')">중복확인</button>
+                                    onclick="id_overlap_check()">중복확인</button>
                             </span>
                         </div>
                     </div>
