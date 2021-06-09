@@ -60,6 +60,9 @@
                             let content = contents[i]
                             let time_post = new Date(content["date"])
                             let time_before = time2str(time_post)
+                            let class_like = contents['like_by_me'] ? "fa-thumbs-up" : "fa-thumbs-o-up"
+                            let count_like = contents['count_like']
+
                             let temp_html = `<div class="card" id="${content['_id']}" style="width: 366px;">
                                                 <div class="card-body">
                                                     <h5 class="card-title">${content['title']}</h5>
@@ -68,7 +71,7 @@
                                                     <h6 class="card-subtitle mb-2 text-muted date">${time_before}</h6>
                                                     <div class="post_bottom">
                                                         <button onclick="like()" type="button" class="card-link btn btn-link like_btn">
-                                                            <i class="fa fa-thumbs-o-up" aria-hidden="true"> 응원해요 ({{ like }})</i>
+                                                            <i class="fa ${class_like}" aria-hidden="true"> 응원해요 ${count_like}</i>
                                                         </button>
                                                         <button onclick="go_modify()" type="button" class="card-link btn btn-link modify_btn">수정
                                                         </button>
