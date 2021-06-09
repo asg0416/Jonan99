@@ -14,14 +14,20 @@
             let title = $('#title').val()
             let comment = $('#contentIn').val()
             let nickname = $('#nickname').val()
+            let today = new Date().toISOString()
 
             $.ajax({
                 type: "POST",
                 url: "/api/content",
-                data: {title_give: title, comment_give: comment, nickname_give: nickname},
+                data: {
+                    title_give: title,
+                    comment_give: comment,
+                    nickname_give: nickname,
+                    date_give: today
+                },
                 success: function (response) {
                     alert(response["msg"]);
-                    window.location.href = "/post_home"
+                    window.location.reload("/post_home")
                 }
             })
         }

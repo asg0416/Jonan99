@@ -136,19 +136,28 @@ def show_post():
 
 @app.route('/api/content', methods=['POST'])
 def post_content():
-    title_receive = request.form['title_give']
-    comment_receive = request.form['comment_give']
-    nickname_receive = request.form['nickname_give']
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        user_info = db.user.find_one({'id': payload['id']})
+        title_receive = request.form['title_give']
+        comment_receive = request.form['comment_give']
+        nickname_receive = request.form['nickname_give']
+        date_receive = request.form["date_give"]
 
+        doc = {
+            'id': user_info['id'],
+            'nick': user_info['nick'],
+            'title': title_receive,
+            'comment': comment_receive,
+            'nickname': nickname_receive,
+            'date': date_receive,
+        }
 
-    doc = {
-        'title': title_receive,
-        'comment': comment_receive,
-        'nickname': nickname_receive,
-    }
-
-    db.posting.insert_one(doc)
-    return jsonify({'msg': '포스팅 완료'})
+        db.posting.insert_one(doc)
+        return jsonify({'result': 'success', 'msg': '포스팅 완료'})
+    except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
+        return redirect(url_for("home"))
 
 
 # [로그인 API]
