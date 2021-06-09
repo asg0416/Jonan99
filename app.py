@@ -130,8 +130,15 @@ def id_overlap():
 
 @app.route('/api/content', methods=['GET'])
 def show_post():
-    contents = list(db.posting.find({}, {'_id': False}))
-    return jsonify({'all_content': contents})
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        contents = list(db.posting.find({}).sort("date", -1).limit(20))
+        for content in contents:
+            content["_id"] = str(content["_id"])
+        return jsonify({"result": "success", 'all_content': contents})
+    except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
+        return redirect(url_for("home"))
 
 
 @app.route('/api/content', methods=['POST'])
