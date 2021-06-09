@@ -4,8 +4,8 @@ from flask import Flask, render_template, jsonify, request, session, redirect, u
 app = Flask(__name__)
 
 from pymongo import MongoClient
-# client = MongoClient('localhost', 27017)
-client = MongoClient('mongodb://13.124.117.232', 27017, username="test", password="test")
+client = MongoClient('localhost', 27017)
+# client = MongoClient('mongodb://13.124.117.232', 27017, username="test", password="test")
 db = client.JONANTEST
 
 # JWT 토큰을 만들 때 필요한 비밀문자열입니다. 아무거나 입력해도 괜찮습니다.
@@ -222,6 +222,31 @@ def api_valid():
 
     except jwt.exceptions.DecodeError:
         return jsonify({'result': 'fail', 'msg': '로그인 정보가 존재하지 않습니다.'})
+
+@app.route('/update_cheerup', methods=['POST'])
+def update_cheerup():
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        user_info = db.user.find_one({"id": payload["id"]})
+        post_id_receive = request.form["post_id_give"]
+        type_receive = request.form["type_give"]
+        action_receive = request.form["action_give"]
+
+        doc = {
+            "post_id": post_id_receive,
+            "id": user_info["id"],
+            "type": type_receive
+        }
+
+        if action_receive == "cheerup":
+            db.cheer.insert_one(doc)
+        else:
+            db.cheer.delete_one(doc)
+        count = db.cheer.count_documents({"post_id": post_id_receive, "type": type_receive})
+        return jsonify({"result": "success", 'msg': 'updated', "count": count})
+    except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
+        return redirect(url_for("home"))
 
 
 if __name__ == '__main__':
