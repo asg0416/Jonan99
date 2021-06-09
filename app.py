@@ -136,6 +136,8 @@ def show_post():
         contents = list(db.posting.find({}).sort("date", -1).limit(20))
         for content in contents:
             content["_id"] = str(content["_id"])
+            content["count_cheer"] = db.cheer.count_documents({"post_id": content["_id"], "type": "cheer"})
+            content["cheer_by_me"] = bool(db.cheer.find_one({"post_id": content["_id"], "type": "cheer", "id": payload['id']}))
         return jsonify({"result": "success", 'all_content': contents})
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("home"))
