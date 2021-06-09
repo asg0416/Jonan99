@@ -14,6 +14,44 @@
             listing()
         })
 
+        function toggle_cheer(post_id, type) {
+            console.log(post_id, type)
+            let $a_like = $(`#${post_id} button[aria-label="cheer"]`)
+            let $i_like = $a_like.find("i")
+            if ($i_like.hasClass("fa-thumbs-up")) {
+                $.ajax({
+                    type: "POST",
+                    url: "/update_cheerup",
+                    data: {
+                        post_id_give: post_id,
+                        type_give: type,
+                        action_give: "uncheer"
+                    },
+                    success: function (response) {
+                        console.log("uncheer")
+                        $i_like.addClass("fa-thumbs-o-up").removeClass("fa-thumbs-up")
+                        $a_like.find("span.cheer-num").text(response["count"])
+                    }
+                })
+            } else {
+                $.ajax({
+                    type: "POST",
+                    url: "/update_cheerup",
+                    data: {
+                        post_id_give: post_id,
+                        type_give: type,
+                        action_give: "cheerup"
+                    },
+                    success: function (response) {
+                        console.log("cheer")
+                        $i_like.addClass("fa-thumbs-up").removeClass("fa-thumbs-o-up")
+                        $a_like.find("span.cheer-num").text(response["count"])
+                    }
+                })
+
+            }
+        }
+
         function go_modify() {
             window.location.href = "/content"
         }
@@ -67,8 +105,8 @@
                                                     <p class="card-text">${content['comment']}</p>
                                                     <h6 class="card-subtitle mb-2 text-muted date">${time_before}</h6>
                                                     <div class="post_bottom">
-                                                        <button onclick="like()" type="button" class="card-link btn btn-link like_btn">
-                                                            <i class="fa fa-thumbs-o-up" aria-hidden="true"> 응원해요 ({{ like }})</i>
+                                                        <button aria-label="cheer" type="button" class="card-link btn btn-link like_btn" onclick="toggle_cheer('${content['_id']}', 'cheer')">
+                                                            <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp;<span class="cheer-num">0</span>
                                                         </button>
                                                         <button onclick="go_modify()" type="button" class="card-link btn btn-link modify_btn">수정
                                                         </button>

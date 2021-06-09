@@ -100,6 +100,7 @@
 }
 
 .like_btn {
+    padding-left: 0;
     float: left;
     font-size: 15px;
     color: red;
@@ -120,4 +121,8 @@
         margin: auto;
     }
 
+}
+
+button[type=button]:hover {
+     background-position: 0px;
 }
