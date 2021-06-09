@@ -48,7 +48,7 @@
                                                 <h5 class="card-title">${title}</h5>
                                                 <h6 class="card-subtitle mb-2 text-muted">${nickname}</h6>
                                                 <p class="card-text">${comment}</p>
-                                                <h6 class="card-subtitle mb-2 text-muted">${date}</h6>
+                                                <h6 class="card-subtitle mb-2 text-muted date">${date}</h6>
                                                 <div class="post_bottom">
                                                     <button onclick="like()" type="button" class="card-link btn btn-link like_btn">
                                                         <i class="fa fa-thumbs-o-up" aria-hidden="true"> 응원해요 ({{ like }})</i>
@@ -102,125 +102,6 @@
 
         <div class="cards_box">
             <div id="posting_box" class="card-columns cards_columns">
-                <div class="card" style="width: 366px;">
-                    <div class="card-body">
-                        <h5 class="card-title">아 어렵네요</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">nick name</h6>
-                        <p class="card-text">인생 뭘까요 왜 이렇게 어렵죠..</p>
-                        <div class="post_bottom">
-                            <button onclick="like()" type="button" class="card-link btn btn-link like_btn">
-                                <i class="fa fa-thumbs-o-up" aria-hidden="true"> 응원해요 ({{ like }})</i>
-                            </button>
-                            <button onclick="go_modify()" type="button" class="card-link btn btn-link modify_btn">수정
-                            </button>
-                            <button onclick="go_delete(name)" type="button" class="card-link btn btn-link delete_btn">
-                                삭제
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card" style="width: 366px;">
-                    <div class="card-body">
-                        <h5 class="card-title">아 어렵네요</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">nick name</h6>
-                        <p class="card-text">인생 뭘까요 왜 이렇게 어렵죠..</p>
-                        <div class="post_bottom">
-                            <button onclick="like()" type="button" class="card-link btn btn-link like_btn">
-                                <i class="fa fa-thumbs-o-up" aria-hidden="true"> 응원해요 ({{ like }})</i>
-                            </button>
-                            <button onclick="go_modify()" type="button" class="card-link btn btn-link modify_btn">수정
-                            </button>
-                            <button onclick="go_delete(name)" type="button" class="card-link btn btn-link delete_btn">
-                                삭제
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card" style="width: 366px;">
-                    <div class="card-body">
-                        <h5 class="card-title">아 어렵네요</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">nick name</h6>
-                        <p class="card-text">인생 뭘까요 왜 이렇게 어렵죠..</p>
-                        <div class="post_bottom">
-                            <button onclick="like()" type="button" class="card-link btn btn-link like_btn">
-                                <i class="fa fa-thumbs-o-up" aria-hidden="true"> 응원해요 ({{ like }})</i>
-                            </button>
-                            <button onclick="go_modify()" type="button" class="card-link btn btn-link modify_btn">수정
-                            </button>
-                            <button onclick="go_delete(name)" type="button" class="card-link btn btn-link delete_btn">
-                                삭제
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card" style="width: 366px;">
-                    <div class="card-body">
-                        <h5 class="card-title">아 어렵네요</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">{{ nickname }}</h6>
-                        <p class="card-text">인생 뭘까요 왜 이렇게 어렵죠..</p>
-                        <div class="post_bottom">
-                            <button onclick="like()" type="button" class="card-link btn btn-link like_btn">
-                                <i class="fa fa-thumbs-o-up" aria-hidden="true"> 응원해요 ({{ like }})</i>
-                            </button>
-                            <button onclick="go_modify()" type="button" class="card-link btn btn-link modify_btn">수정
-                            </button>
-                            <button onclick="go_delete(name)" type="button" class="card-link btn btn-link delete_btn">
-                                삭제
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card" style="width: 366px;">
-                    <div class="card-body">
-                        <h5 class="card-title">아 어렵네요</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">{{ nickname }}</h6>
-                        <p class="card-text">인생 뭘까요 왜 이렇게 어렵죠..</p>
-                        <div class="post_bottom">
-                            <button onclick="like()" type="button" class="card-link btn btn-link like_btn">
-                                <i class="fa fa-thumbs-o-up" aria-hidden="true"> 응원해요 ({{ like }})</i>
-                            </button>
-                            <button onclick="go_modify()" type="button" class="card-link btn btn-link modify_btn">수정
-                            </button>
-                            <button onclick="go_delete(name)" type="button" class="card-link btn btn-link delete_btn">
-                                삭제
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card" style="width: 366px;">
-                    <div class="card-body">
-                        <h5 class="card-title">아 어렵네요</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">{{ nickname }}</h6>
-                        <p class="card-text">인생 뭘까요 왜 이렇게 어렵죠..</p>
-                        <div class="post_bottom">
-                            <button onclick="like()" type="button" class="card-link btn btn-link like_btn">
-                                <i class="fa fa-thumbs-o-up" aria-hidden="true"> 응원해요 ({{ like }})</i>
-                            </button>
-                            <button onclick="go_modify()" type="button" class="card-link btn btn-link modify_btn">수정
-                            </button>
-                            <button onclick="go_delete(name)" type="button" class="card-link btn btn-link delete_btn">
-                                삭제
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card" style="width: 366px;">
-                    <div class="card-body">
-                        <h5 class="card-title">아 어렵네요</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">{{ nickname }}</h6>
-                        <p class="card-text">인생 뭘까요 왜 이렇게 어렵죠..</p>
-                        <div class="post_bottom">
-                            <button onclick="like()" type="button" class="card-link btn btn-link like_btn">
-                                <i class="fa fa-thumbs-o-up" aria-hidden="true"> 응원해요 ({{ like }})</i>
-                            </button>
-                            <button onclick="go_modify()" type="button" class="card-link btn btn-link modify_btn">수정
-                            </button>
-                            <button onclick="go_delete(name)" type="button" class="card-link btn btn-link delete_btn">
-                                삭제
-                            </button>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
 

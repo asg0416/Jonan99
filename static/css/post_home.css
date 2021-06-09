@@ -40,6 +40,11 @@
     z-index: 1;
 }
 
+.date{
+    font-size: small;
+    margin-bottom: 20px !important;
+}
+
 .menu_nav {
     border: black 1px solid;
     border-radius: 5px;
@@ -72,6 +77,9 @@
 }
 
 .post_bottom {
+    position: absolute;
+    bottom: 0px;
+    width: 330px;
     display: block;
     text-align: right;
 }
