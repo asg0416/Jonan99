@@ -140,10 +140,8 @@ def show_post():
             db.posting.update_one({'_id': content["_id"]}, {'$set': {'post_id': str(content["_id"])}})
             content["_id"] = str(content["_id"])
             content["count_cheer"] = db.cheer.count_documents({"post_id": content["_id"], "type": "cheer"})
-            content["cheer_by_me"] = bool(
-            db.cheer.find_one({"post_id": content["_id"], "type": "cheer", "id": payload['id']}))
-
-            content["my_post"] = bool(db.posting.find_one({"post_id": content["_id"], "id": payload['id']}))  # <<++++
+            content["cheer_by_me"] = bool(db.cheer.find_one({"post_id": content["_id"], "type": "cheer", "id": payload['id']}))
+            content["my_post"] = bool(db.posting.find_one({"post_id": content["_id"], "id": payload['id']}))
 
         return jsonify({"result": "success", 'all_content': contents})
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
