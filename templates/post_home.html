@@ -6,7 +6,7 @@
 
 {% block title %}
 
-    - 게시판
+- 게시판
 
 {% endblock %}
 
@@ -58,11 +58,13 @@
         window.location.href = "/content"
     }
 
-    function go_delete(name) {
+    function go_delete(post_id) {
         $.ajax({
             type: 'POST',
             url: '/api/delete',
-            data: {name_give: name},
+            data: {
+                postid_give: post_id
+            },
             success: function (response) {
                 alert(response['msg']);
                 window.location.reload()
@@ -102,8 +104,7 @@
                         let time_before = time2str(time_post)
                         let class_cheer = content['cheer_by_me'] ? "fa-thumbs-up" : "fa-thumbs-o-up"
                         let count_cheer = content['count_cheer']
-
-                        let my_post = content["my_post"] ? "show_it" : "hide_it" // <<<<++++
+                        let my_post = content["my_post"] ? "show_it" : "hide_it"
 
                         let temp_html = `<div class="card" id="${content['_id']}" style="width: 366px;">
                                                 <div class="card-body">
@@ -117,7 +118,7 @@
                                                         </button>
                                                         <button onclick="go_modify()" type="button" class="card-link btn btn-link modify_btn ${my_post}">수정
                                                         </button>
-                                                        <button onclick="go_delete(name)" type="button" class="card-link btn btn-link delete_btn ${my_post}">
+                                                        <button onclick="go_delete('${content['post_id']}')" type="button" class="card-link btn btn-link delete_btn ${my_post}">
                                                             삭제
                                                         </button>
                                                     </div>

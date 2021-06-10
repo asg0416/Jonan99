@@ -82,11 +82,11 @@ def content():
 
 # post 삭제 api 필요
 @app.route('/api/delete', methods=['POST'])
-def delete_star():
-    name_receive = request.form['name_give']
-    # db.mystar.delete_one({'name': name_receive})
+def delete_post():
+    postid_receive = request.form['postid_give']
+    db.posting.remove({'post_id': postid_receive})
 
-    return jsonify({'msg': '삭제완료'})
+    return jsonify({'result': 'success', 'msg': '삭제완료'})
 
 
 #################################
@@ -133,7 +133,6 @@ def id_overlap():
 def show_post():
     token_receive = request.cookies.get('mytoken')
     try:
-
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         contents = list(db.posting.find({}).sort("date", -1).limit(20))
         for content in contents:
@@ -141,9 +140,9 @@ def show_post():
             content["_id"] = str(content["_id"])
             content["count_cheer"] = db.cheer.count_documents({"post_id": content["_id"], "type": "cheer"})
             content["cheer_by_me"] = bool(
-            db.cheer.find_one({"post_id": content["_id"], "type": "cheer", "id": payload['id']}))
+                db.cheer.find_one({"post_id": content["_id"], "type": "cheer", "id": payload['id']}))
 
-            content["my_post"] = bool(db.posting.find_one({"post_id": content["_id"], "id": payload['id']}))  # <<++++
+            content["my_post"] = bool(db.posting.find_one({"post_id": content["_id"], "id": payload['id']}))
 
         return jsonify({"result": "success", 'all_content': contents})
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
