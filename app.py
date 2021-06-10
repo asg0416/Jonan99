@@ -83,11 +83,15 @@ def content():
 # post 삭제 api 필요
 @app.route('/api/delete', methods=['POST'])
 def delete_post():
-    postid_receive = request.form['postid_give']
-    db.posting.remove({'post_id': postid_receive})
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        postid_receive = request.form['postid_give']
+        db.posting.remove({'post_id': postid_receive,'id':payload['id']})
 
-    return jsonify({'result': 'success', 'msg': '삭제완료'})
-
+        return jsonify({'result': 'success', 'msg': '삭제완료'})
+    except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
+        return redirect(url_for("home"))
 
 #################################
 ##  로그인을 위한 API            ##
