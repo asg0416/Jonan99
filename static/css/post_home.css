@@ -107,6 +107,10 @@
     font-family: 'Consolas', 'Deja Vu Sans Mono', 'Bitstream Vera Sans Mono', monospace;
 }
 
+.hide_it {
+    display: none;
+}
+
 @media ( max-width: 1238px ) {
     .cards_box {
         width: 800px;

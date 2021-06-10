@@ -4,6 +4,7 @@ from flask import Flask, render_template, jsonify, request, session, redirect, u
 app = Flask(__name__)
 
 from pymongo import MongoClient
+
 client = MongoClient('localhost', 27017)
 # client = MongoClient('mongodb://13.124.117.232', 27017, username="test", password="test")
 db = client.JONANTEST
@@ -47,7 +48,7 @@ def post_home():
         weather_response = weather.json()
         weather_temp = weather_response['main']['temp'] - 273.15
         return render_template('post_home.html', nickname=user_info["nick"], water_temp=water_temp,
-                               weather_temp=weather_temp)
+                               weather_temp=weather_temp, user_info=user_info)
     except jwt.ExpiredSignatureError:
         return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
     except jwt.exceptions.DecodeError:
@@ -132,12 +133,18 @@ def id_overlap():
 def show_post():
     token_receive = request.cookies.get('mytoken')
     try:
+
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         contents = list(db.posting.find({}).sort("date", -1).limit(20))
         for content in contents:
+            db.posting.update_one({'_id': content["_id"]}, {'$set': {'post_id': str(content["_id"])}})
             content["_id"] = str(content["_id"])
             content["count_cheer"] = db.cheer.count_documents({"post_id": content["_id"], "type": "cheer"})
-            content["cheer_by_me"] = bool(db.cheer.find_one({"post_id": content["_id"], "type": "cheer", "id": payload['id']}))
+            content["cheer_by_me"] = bool(
+            db.cheer.find_one({"post_id": content["_id"], "type": "cheer", "id": payload['id']}))
+
+            content["my_post"] = bool(db.posting.find_one({"post_id": content["_id"], "id": payload['id']}))  # <<++++
+
         return jsonify({"result": "success", 'all_content': contents})
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("home"))
@@ -164,6 +171,7 @@ def post_content():
         }
 
         db.posting.insert_one(doc)
+
         return jsonify({'result': 'success', 'msg': '포스팅 완료'})
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("home"))
@@ -224,6 +232,7 @@ def api_valid():
 
     except jwt.exceptions.DecodeError:
         return jsonify({'result': 'fail', 'msg': '로그인 정보가 존재하지 않습니다.'})
+
 
 @app.route('/update_cheerup', methods=['POST'])
 def update_cheerup():
