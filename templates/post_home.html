@@ -54,9 +54,6 @@
         }
     }
 
-    function go_modify() {
-        window.location.href = "/content"
-    }
 
     function go_delete(post_id) {
         $.ajax({
@@ -116,7 +113,7 @@
                                                         <button aria-label="cheer" type="button" class="card-link btn btn-link like_btn" onclick="toggle_cheer('${content['_id']}', 'cheer')">
                                                             <i class="fa ${class_cheer}" aria-hidden="true"></i>&nbsp;<span class="cheer-num">${count_cheer}</span>
                                                         </button>
-                                                        <button onclick="go_modify()" type="button" class="card-link btn btn-link modify_btn ${my_post}">수정
+                                                        <button onclick='window.location.href = "/content/${content['post_id']}"' type="button" class="card-link btn btn-link modify_btn ${my_post}">수정
                                                         </button>
                                                         <button onclick="go_delete('${content['post_id']}')" type="button" class="card-link btn btn-link delete_btn ${my_post}">
                                                             삭제

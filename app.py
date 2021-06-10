@@ -66,18 +66,25 @@ def sign_up():
     return render_template('sign_up.html')
 
 
-@app.route('/content')
-def content():
-    return render_template('content.html')
+@app.route('/content/<post_id>')
+def content(post_id):
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+
+        post_info = db.posting.find_one({"post_id": post_id}, {"_id": False})
+        return render_template('content.html', post_info=post_info)
+    except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
+        return redirect(url_for("login"))
 
 
-# # logout api 필요
-# @app.route('/api/logout', methods=['POST'])
-# def logout():
-#     id_receive = request.form['id_give']
-#     # db.mystar.delete_one({'name': name_receive})
+# 수정
+# @app.route('/api/modify', methods=['POST'])
+# def modify():
+#     postid_receive = request.form['postid_give']
+#     post_id_info = db.user.find_one({'post_id': postid_receive})
 #
-#     return jsonify({'msg': '로그아웃 되었습니다.'})
+#     return jsonify({'result': 'success', 'post id': '삭제완료'})
 
 
 # post 삭제 api 필요
