@@ -5,14 +5,12 @@
 {% endblock %}
 
 {% block title %}
-    - test home
+    - 회원 가입
 {% endblock %}
-
 
 {% block script %}
     <script>
         $(document).ready(function pwcheck() {});
-
         <!--     아이디 중복확인 함수     -->
         function id_overlap_check() {
             $.ajax({
@@ -31,22 +29,18 @@
             })
         }
 
-
         function foucus() {
             return $('#userpw').val('').focus()
         }
 
         let count = false
+
         function id_count() {
             count = true
         }
 
-        {###############################################}
-
-
-
         <!--  비밀번호 일치/불일치 표시  -->
-        $(function pwcheck () {
+        $(function pwcheck() {
             $('#chkNotice').html('');
             $('#userpw').keyup(function () {
                 if ($('#userpw_check').val()) {
@@ -72,8 +66,6 @@
 
             });
         });
-
-        {###############################################}
 
         function register() {
             let nick = $('#usernick').val();
@@ -142,7 +134,8 @@
                         <div class="input-group mb-3 align-items-center">
                             <label class="text-centered col-2" for="userid">아이디</label>
                             <input type="text" class="form-control" id="userid" placeholder="ID를 입력하세요!"
-                                   aria-label="Recipient's username" aria-describedby="button-addon2">
+                                   aria-label="Recipient's username" aria-describedby="button-addon2"
+                                   autocomplete=”off”>
                             <span>
                             <button class="btn btn-outline-secondary" type="button" id="button-addon2"
                                     onclick="id_overlap_check(), id_count()">중복확인</button>
@@ -154,8 +147,10 @@
                     <div class="input-group ">
                         <div class="input-group mb-3 align-items-center">
                             <label class="text-centered col-2" for="userpw">비밀번호</label>
-                            <input type="password" class="form-control" id="userpw" placeholder="영문+숫자 조합 6자리 이상으로 입력하세요!"
-                                   aria-label="Recipient's username" aria-describedby="button-addon2" onpaste="javascript:return false;">
+                            <input type="password" class="form-control" id="userpw"
+                                   placeholder="영문+숫자 조합 6자리 이상으로 입력하세요!"
+                                   aria-label="Recipient's username" aria-describedby="button-addon2"
+                                   onpaste="javascript:return false;" autocomplete=”off”>
                         </div>
                     </div>
 
@@ -164,20 +159,19 @@
                         <div class="input-group mb-3 align-items-center">
                             <label class="text-centered col-2" for="userpw_check">비밀번호 확인</label>
                             <input type="password" class="form-control" id="userpw_check" placeholder="PW를 입력하세요!"
-                                   aria-label="Recipient's username" aria-describedby="button-addon2" onpaste="javascript:return false;">
+                                   aria-label="Recipient's username" aria-describedby="button-addon2"
+                                   onpaste="javascript:return false;" autocomplete=”off”>
                             <div class="pwcheck" id="chkNotice" size="2"></div>
                         </div>
                     </div>
-
-                    <!-- pwcheck -->
-
 
                     <!-- nickname -->
                     <div class="input-group ">
                         <div class="input-group mb-3 align-items-center">
                             <label class="text-centered col-2" for="usernick">Nick</label>
                             <input type="text" class="form-control" id="usernick" placeholder="닉네임을 입력하세요!"
-                                   aria-label="Recipient's username" aria-describedby="button-addon2">
+                                   aria-label="Recipient's username" aria-describedby="button-addon2"
+                                   autocomplete=”off”>
                         </div>
                     </div>
 

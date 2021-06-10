@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block title %}
-    - test home
+    - 게시글 작성
 {% endblock %}
 
 {% block script %}
@@ -18,7 +18,7 @@
             const user= {{ user | tojson }}
             const href= {{ href_info | tojson }}
 
-            if ( user == href) {
+            if (user == href) {
                 $.ajax({
                     type: "POST",
                     url: "/api/content",
@@ -83,7 +83,8 @@
                 <input class="text" type="text" name="aa" id="nickname" value="{{ post_info['nickname'] }}">
             </div>
             <div class="submitBtn">
-                <button class="submitButton btn btn-outline-dark" onclick="postContent('{{ post_info['post_id'] }}')" type="submit"
+                <button class="submitButton btn btn-outline-dark" onclick="postContent('{{ post_info['post_id'] }}')"
+                        type="submit"
                         style="color: azure;">확인
                 </button>
                 <button onclick="window.location.href='/post_home'" class="backButton btn btn-outline-dark"

@@ -40,7 +40,7 @@
     z-index: 1;
 }
 
-.date{
+.date {
     font-size: small;
     margin-bottom: 20px !important;
 }
@@ -111,12 +111,19 @@
     display: none;
 }
 
+/*
 @media ( max-width: 1238px ) {
     .cards_box {
         width: 800px;
         margin: auto;
     }
 
+}
+@media ( max-width: 1700px ) {
+    .cards_box {
+        width: 1200px;
+        margin: auto;
+    }
 }
 
 @media ( max-width: 837px ) {
@@ -125,4 +132,4 @@
         margin: auto;
     }
 
-}
+}*/

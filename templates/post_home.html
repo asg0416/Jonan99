@@ -1,109 +1,109 @@
 {% extends "jinja_sample/after_login.html" %}
 
 {% block head %}
-{{ super() }}
+    {{ super() }}
 {% endblock %}
 
 {% block title %}
 
-- 게시판
+    - 게시판
 
 {% endblock %}
 
 {% block script %}
-<script>
-    $(document).ready(function () {
-        listing()
-    })
+    <script>
+        $(document).ready(function () {
+            listing()
+        })
 
-    function toggle_cheer(post_id, type) {
-        console.log(post_id, type)
-        let $a_like = $(`#${post_id} button[aria-label="cheer"]`)
-        let $i_like = $a_like.find("i")
-        if ($i_like.hasClass("fa-thumbs-up")) {
-            $.ajax({
-                type: "POST",
-                url: "/update_cheerup",
-                data: {
-                    post_id_give: post_id,
-                    type_give: type,
-                    action_give: "uncheer"
-                },
-                success: function (response) {
-                    console.log("uncheer")
-                    $i_like.addClass("fa-thumbs-o-up").removeClass("fa-thumbs-up")
-                    $a_like.find("span.cheer-num").text(response["count"])
-                }
-            })
-        } else {
-            $.ajax({
-                type: "POST",
-                url: "/update_cheerup",
-                data: {
-                    post_id_give: post_id,
-                    type_give: type,
-                    action_give: "cheerup"
-                },
-                success: function (response) {
-                    console.log("cheer")
-                    $i_like.addClass("fa-thumbs-up").removeClass("fa-thumbs-o-up")
-                    $a_like.find("span.cheer-num").text(response["count"])
-                }
-            })
+        function toggle_cheer(post_id, type) {
+            console.log(post_id, type)
+            let $a_like = $(`#${post_id} button[aria-label="cheer"]`)
+            let $i_like = $a_like.find("i")
+            if ($i_like.hasClass("fa-thumbs-up")) {
+                $.ajax({
+                    type: "POST",
+                    url: "/update_cheerup",
+                    data: {
+                        post_id_give: post_id,
+                        type_give: type,
+                        action_give: "uncheer"
+                    },
+                    success: function (response) {
+                        console.log("uncheer")
+                        $i_like.addClass("fa-thumbs-o-up").removeClass("fa-thumbs-up")
+                        $a_like.find("span.cheer-num").text(response["count"])
+                    }
+                })
+            } else {
+                $.ajax({
+                    type: "POST",
+                    url: "/update_cheerup",
+                    data: {
+                        post_id_give: post_id,
+                        type_give: type,
+                        action_give: "cheerup"
+                    },
+                    success: function (response) {
+                        console.log("cheer")
+                        $i_like.addClass("fa-thumbs-up").removeClass("fa-thumbs-o-up")
+                        $a_like.find("span.cheer-num").text(response["count"])
+                    }
+                })
 
-        }
-    }
-
-
-    function go_delete(post_id) {
-        $.ajax({
-            type: 'POST',
-            url: '/api/delete',
-            data: {
-                postid_give: post_id
-            },
-            success: function (response) {
-                alert(response['msg']);
-                window.location.reload()
             }
-        });
-    }
-
-    function time2str(date) {
-        let today = new Date()
-        let time = (today - date) / 1000 / 60  // 분
-
-        if (time < 60) {
-            return parseInt(time) + "분 전"
         }
-        time = time / 60  // 시간
-        if (time < 24) {
-            return parseInt(time) + "시간 전"
-        }
-        time = time / 24
-        if (time < 7) {
-            return parseInt(time) + "일 전"
-        }
-        return `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일`
-    }
 
-    function listing() {
-        $.ajax({
-            type: "GET",
-            url: "/api/content",
-            data: {},
-            success: function (response) {
-                if (response['result'] == 'success') {
-                    let contents = response['all_content']
-                    for (let i = 0; i < contents.length; i++) {
-                        let content = contents[i]
-                        let time_post = new Date(content["date"])
-                        let time_before = time2str(time_post)
-                        let class_cheer = content['cheer_by_me'] ? "fa-thumbs-up" : "fa-thumbs-o-up"
-                        let count_cheer = content['count_cheer']
-                        let my_post = content["my_post"] ? "show_it" : "hide_it"
 
-                        let temp_html = `<div class="card" id="${content['_id']}" style="width: 366px;">
+        function go_delete(post_id) {
+            $.ajax({
+                type: 'POST',
+                url: '/api/delete',
+                data: {
+                    postid_give: post_id
+                },
+                success: function (response) {
+                    alert(response['msg']);
+                    window.location.reload()
+                }
+            });
+        }
+
+        function time2str(date) {
+            let today = new Date()
+            let time = (today - date) / 1000 / 60  // 분
+
+            if (time < 60) {
+                return parseInt(time) + "분 전"
+            }
+            time = time / 60  // 시간
+            if (time < 24) {
+                return parseInt(time) + "시간 전"
+            }
+            time = time / 24
+            if (time < 7) {
+                return parseInt(time) + "일 전"
+            }
+            return `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일`
+        }
+
+        function listing() {
+            $.ajax({
+                type: "GET",
+                url: "/api/content",
+                data: {},
+                success: function (response) {
+                    if (response['result'] == 'success') {
+                        let contents = response['all_content']
+                        for (let i = 0; i < contents.length; i++) {
+                            let content = contents[i]
+                            let time_post = new Date(content["date"])
+                            let time_before = time2str(time_post)
+                            let class_cheer = content['cheer_by_me'] ? "fa-thumbs-up" : "fa-thumbs-o-up"
+                            let count_cheer = content['count_cheer']
+                            let my_post = content["my_post"] ? "show_it" : "hide_it"
+
+                            let temp_html = `<div class="card" id="${content['_id']}" style="width: 366px;">
                                                 <div class="card-body">
                                                     <h5 class="card-title">${content['title']}</h5>
                                                     <h6 class="card-subtitle mb-2 text-muted">${content['nickname']}</h6>
@@ -121,52 +121,51 @@
                                                     </div>
                                                 </div>
                                             </div>`
-                        $('#posting_box').append(temp_html)
+                            $('#posting_box').append(temp_html)
+                        }
                     }
                 }
-            }
-        })
-    }
+            })
+        }
 
-</script>
+    </script>
 {% endblock %}
 
 {% block nav %}
-{{ super() }}
+    {{ super() }}
 {% endblock %}
 
 {% block body %}
-<div class="main_wrap">
-    <ul class="nav nav-pills nav-fill menu_nav">
-        <li class="nav-item">
-            <a class="nav-link water_temp">
-                <p>
-                    한강 수온 : <span id="water_api">{{ water_temp }} °C</span>
-                </p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link weather">
-                <p>
-                    날씨 : <span id="weather_api">{{ weather_temp|round(1) }} °C</span>
-                </p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#"></a>
-        </li>
-        <li class="nav-item"></li>
-        <li class="nav-item">
-            <a class="nav-link post_text" href="/content/{{ user_info['id'] }}">글쓰기</a>
-{#            onclick='window.location.href = "/content/{{ post_info['id'] }}"'#}
-        </li>
-    </ul>
+    <div class="main_wrap">
+        <ul class="nav nav-pills nav-fill menu_nav">
+            <li class="nav-item">
+                <a class="nav-link water_temp">
+                    <p>
+                        한강 수온 : <span id="water_api">{{ water_temp }} °C</span>
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link weather">
+                    <p>
+                        날씨 : <span id="weather_api">{{ weather_temp|round(1) }} °C</span>
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"></a>
+            </li>
+            <li class="nav-item"></li>
+            <li class="nav-item">
+                <a class="nav-link post_text" href="/content/{{ user_info['id'] }}">글쓰기</a>
+            </li>
+        </ul>
 
 
-    <div class="cards_box">
-        <div id="posting_box" class="card-columns cards_columns">
+        <div class="cards_box">
+            <div id="posting_box" class="card-columns cards_columns">
+            </div>
         </div>
-    </div>
 
-</div>
+    </div>
 {% endblock %}

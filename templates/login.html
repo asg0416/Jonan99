@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block title %}
-    - test home
+    - 로그인 페이지
 {% endblock %}
 
 {% block script %}
@@ -55,14 +55,16 @@
                                 <div class="input-group mb-3 align-items-center">
                                     <label class="text-centered col-2" for="userid">ID</label>
                                     <input type="text" class="form-control" id="userid" placeholder="아이디를 입력해주세요."
-                                           aria-label="Recipient's username" aria-describedby="button-addon2">
+                                           aria-label="Recipient's username" aria-describedby="button-addon2"
+                                           autocomplete=”off”>
                                 </div>
                             </div>
                             <div class="input-group ">
                                 <div class="input-group mb-3 align-items-center">
                                     <label class="text-centered col-2" for="userpw">PW</label>
                                     <input type="password" class="form-control" id="userpw" placeholder="비밀번호를 입력해주세요."
-                                           aria-label="Recipient's username" aria-describedby="button-addon2">
+                                           aria-label="Recipient's username" aria-describedby="button-addon2"
+                                           autocomplete=”off”>
                                 </div>
                             </div>
                             <button type="button" class="btn btn-dark" onclick="login()">

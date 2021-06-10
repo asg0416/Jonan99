@@ -5,7 +5,7 @@
 .navbar {
     display: block;
     align-items: center;
-    background-color: rgb(0, 0, 0, 0.9);
+    background-color: rgba(0, 0, 0, 0.9);
 }
 
 .navbar_logo {
