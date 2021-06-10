@@ -31,13 +31,15 @@
 
 .main_wrap {
     padding: 15px;
-    margin: 20px 20px 0 20px;
+    margin: 20px auto;
     width: auto;
+    max-width: 1700px;
     background-color: #bfbfbf;
     border-radius: 5px;
     align-items: center;
     opacity: 0.8;
     z-index: 1;
+    display: block;
 }
 
 .date {
@@ -111,17 +113,33 @@
     display: none;
 }
 
-/*
-@media ( max-width: 1238px ) {
+@media ( max-width: 2036px ) {
     .cards_box {
-        width: 800px;
+        width: 1570px;
+        margin: auto;
+    }
+}
+
+@media ( max-width: 1638px ) {
+    .cards_box {
+        width: 1170px;
         margin: auto;
     }
 
+    .main_wrap {
+        width: 1220px;
+        margin: auto;
+    }
 }
-@media ( max-width: 1700px ) {
+
+@media ( max-width: 1238px ) {
     .cards_box {
-        width: 1200px;
+        width: 770px;
+        margin: auto;
+    }
+
+    .main_wrap {
+        width: 820px;
         margin: auto;
     }
 }
@@ -132,4 +150,10 @@
         margin: auto;
     }
 
-}*/
+    .main_wrap {
+        width: 400px;
+        margin: auto;
+    }
+}
+
+

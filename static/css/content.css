@@ -43,6 +43,8 @@ a {
     width: 800px;
     height: 700px;
     border: 1px solid whitesmoke;
+    padding-left: 10px;
+    padding-right: 10px;;
 }
 
 .labelTitle {
@@ -73,6 +75,8 @@ a {
     align-items: center;
     justify-content: space-evenly;
     flex-direction: column;
+    margin-left: 15px;
+    margin-right: 15px;
 }
 
 input {
@@ -81,11 +85,15 @@ input {
 }
 
 .submitButton {
-    margin: 0 100px;
+    margin-left: auto;
+    margin-right: 100px;
+    border: 2px white solid;
 }
 
 .backButton {
-    margin: 0 100px;
+    margin-left: 100px;
+    margin-right: auto;
+    border: 2px white solid;
 }
 
 .inContent {
@@ -113,3 +121,4 @@ input {
     padding: 5px 0px;
     background-color: rgb(235, 241, 241);
 }
+
