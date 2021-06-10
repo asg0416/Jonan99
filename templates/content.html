@@ -15,24 +15,32 @@
             let comment = $('#contentIn').val()
             let nickname = $('#nickname').val()
             let today = new Date().toISOString()
+            const user= {{ user | tojson }}
+            const href= {{ href_info | tojson }}
 
-            $.ajax({
-                type: "POST",
-                url: "/api/content",
-                data: {
-                    title_give: title,
-                    comment_give: comment,
-                    nickname_give: nickname,
-                    date_give: today
-                },
-                success: function (response) {
-                    alert(response["msg"]);
+            if ( user == href) {
+                $.ajax({
+                    type: "POST",
+                    url: "/api/content",
+                    data: {
+                        title_give: title,
+                        comment_give: comment,
+                        nickname_give: nickname,
+                        date_give: today
+                    },
+                    success: function (response) {
+                        alert(response["msg"]);
 
-                    window.location.replace("/post_home")
+                        window.location.replace("/post_home")
 
-                }
-            })
+                    }
+                })
+            } else {
+                alert('수정연결')
+            }
+
         }
+
     </script>
 {% endblock %}
 
@@ -44,7 +52,7 @@
     <section class="contentMain mx-auto col-lg-6 col-md-8 col-sm-10 col-12">
         <div class="wrap">
             <div class="introduceText">
-                당신의 하소연을 풀어주세요...
+                {{ user_info['id'] }}님 당신의 하소연을 풀어주세요...
             </div>
             <div class="contentTitle">
                 <label class="labelTitle" for="title">제목</label>
@@ -60,7 +68,7 @@
             </div>
             <div class="submitBtn">
                 <button class="submitButton btn btn-outline-dark" onclick="postContent()" type="submit"
-                        style="color: azure;">게시하기
+                        style="color: azure;">확인
                 </button>
                 <button onclick="window.location.href='/post_home'" class="backButton btn btn-outline-dark"
                         type="Button" style="color: azure;">돌아가기

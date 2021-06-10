@@ -5,8 +5,8 @@ app = Flask(__name__)
 
 from pymongo import MongoClient
 
-client = MongoClient('localhost', 27017)
-# client = MongoClient('mongodb://13.124.117.232', 27017, username="test", password="test")
+# client = MongoClient('localhost', 27017)
+client = MongoClient('mongodb://13.124.117.232', 27017, username="test", password="test")
 db = client.JONANTEST
 
 # JWT 토큰을 만들 때 필요한 비밀문자열입니다. 아무거나 입력해도 괜찮습니다.
@@ -66,15 +66,26 @@ def sign_up():
     return render_template('sign_up.html')
 
 
-@app.route('/content')
-def content():
-    return render_template('content.html')
+# @app.route('/content')
+# def content():
+#     return render_template('content.html')
 
 
-@app.route('/content_modify/<post_id>')
-def content_modify(post_id):
+@app.route('/content/<post_id>')
+def content(post_id):
+    token_receive = request.cookies.get('mytoken')
+    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+    user_info = db.user.find_one({"id": payload['id']})
+    href_info = str(post_id)
+    user = str(user_info['id'])
+
     post_info = db.posting.find_one({"post_id": post_id}, {"_id": False})
-    return render_template('content_modify.html', post_info=post_info)
+    return render_template('content.html', post_info=post_info, user_info=user_info, href_info=href_info, user=user)
+
+# @app.route('/content_modify/<post_id>')
+# def content_modify(post_id):
+#     post_info = db.posting.find_one({"post_id": post_id}, {"_id": False})
+#     return render_template('content_modify.html', post_info=post_info)
 
 
 # 수정
