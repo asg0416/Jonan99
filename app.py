@@ -82,19 +82,8 @@ def content(post_id):
     post_info = db.posting.find_one({"post_id": post_id}, {"_id": False})
     return render_template('content.html', post_info=post_info, user_info=user_info, href_info=href_info, user=user)
 
-# @app.route('/content_modify/<post_id>')
-# def content_modify(post_id):
-#     post_info = db.posting.find_one({"post_id": post_id}, {"_id": False})
-#     return render_template('content_modify.html', post_info=post_info)
 
 
-# 수정
-# @app.route('/api/modify', methods=['POST'])
-# def modify():
-#     postid_receive = request.form['postid_give']
-#     post_id_info = db.user.find_one({'post_id': postid_receive})
-#
-#     return jsonify({'result': 'success', 'post id': '삭제완료'})
 
 
 # post 삭제 api 필요
@@ -193,6 +182,31 @@ def post_content():
         return jsonify({'result': 'success', 'msg': '포스팅 완료'})
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("home"))
+
+
+# 수정
+@app.route('/api/modify', methods=['POST'])
+def modify():
+    user_id_receive = request.form['user_id_give']
+    user_info = db.user.find_one({'id': user_id_receive})
+    post_id_receive = request.form['post_id_give']
+    title_receive = request.form['title_give']
+    comment_receive = request.form['comment_give']
+    nickname_receive = request.form['nickname_give']
+
+    doc = {
+        'id': user_info['id'],
+        'nick': user_info['nick'],
+        'title': title_receive,
+        'comment': comment_receive,
+        'nickname': nickname_receive,
+    }
+
+    db.posting.update_one({'post_id': post_id_receive}, {'$set': {'title': title_receive}})
+    db.posting.update_one({'post_id': post_id_receive}, {'$set': {'comment': comment_receive}})
+    db.posting.update_one({'post_id': post_id_receive}, {'$set': {'nickname': nickname_receive}})
+
+    return jsonify({'result': 'success', 'msg': '수정 완료'})
 
 
 # [로그인 API]

@@ -10,10 +10,10 @@
 
 {% block script %}
     <script>
-        function postContent() {
-            let title = $('#title').val()
-            let comment = $('#contentIn').val()
-            let nickname = $('#nickname').val()
+        function postContent(post_id) {
+            let title = $("#title").val()
+            let comment = $("#contentIn").val()
+            let nickname = $("#nickname").val()
             let today = new Date().toISOString()
             const user= {{ user | tojson }}
             const href= {{ href_info | tojson }}
@@ -36,7 +36,23 @@
                     }
                 })
             } else {
-                alert('수정연결')
+                $.ajax({
+                    type: "POST",
+                    url: "/api/modify",
+                    data: {
+                        title_give: title,
+                        comment_give: comment,
+                        nickname_give: nickname,
+                        post_id_give: post_id,
+                        user_id_give: user
+                    },
+                    success: function (response) {
+                        alert(response["msg"]);
+
+                        window.location.replace("/post_home")
+
+                    }
+                })
             }
 
         }
@@ -56,18 +72,18 @@
             </div>
             <div class="contentTitle">
                 <label class="labelTitle" for="title">제목</label>
-                <input class="text" type="text" name="za" id="title">
+                <input class="text" type="text" name="za" id="title" value="{{ post_info['title'] }}">
             </div>
             <div class="inContent">
                 <label class="labelContentIn" for="contentIn">내용</label>
-                <textarea name="" id="contentIn" cols="60" rows="8"></textarea>
+                <textarea name="" id="contentIn" cols="60" rows="8">{{ post_info['comment'] }}</textarea>
             </div>
             <div class="nickName">
                 <label class="labelnickName" for="nickname">닉네임</label>
-                <input class="text" type="text" name="aa" id="nickname">
+                <input class="text" type="text" name="aa" id="nickname" value="{{ post_info['nickname'] }}">
             </div>
             <div class="submitBtn">
-                <button class="submitButton btn btn-outline-dark" onclick="postContent()" type="submit"
+                <button class="submitButton btn btn-outline-dark" onclick="postContent('{{ post_info['post_id'] }}')" type="submit"
                         style="color: azure;">확인
                 </button>
                 <button onclick="window.location.href='/post_home'" class="backButton btn btn-outline-dark"
