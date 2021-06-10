@@ -5,7 +5,9 @@
 {% endblock %}
 
 {% block title %}
-- test home
+
+    - 게시판
+
 {% endblock %}
 
 {% block script %}
@@ -127,58 +129,6 @@
             }
         })
     }
-
-    /*
-
-        function listing() {
-            $.ajax({
-                type: "GET",
-                url: "/api/content",
-                data: {},
-                success: function (response) {
-                    if (response['result'] == 'success') {
-                        let contents = response['all_content']
-                        for (let i = 0; i < contents.length; i++) {
-                            let content = contents[i]
-
-                            let user_id = user_info.id
-                            let status = content['id']
-                            // let my_post = content['my_post'] ? "show_it" : "hide_it" // <<<<++++
-
-                            let time_post = new Date(content["date"])
-                            let time_before = time2str(time_post)
-                            let class_cheer = content['cheer_by_me'] ? "fa-thumbs-up" : "fa-thumbs-o-up"
-                            let count_cheer = content['count_cheer']
-                            let temp_html = `<div class="card" id="${content['_id']}" style="width: 366px;">
-                                                    <div class="card-body">
-                                                        <h5 class="card-title">${content['title']}</h5>
-                                                        <h6 class="card-subtitle mb-2 text-muted">${content['nickname']}</h6>
-                                                        <p class="card-text">${content['comment']}</p>
-                                                        <h6 class="card-subtitle mb-2 text-muted date">${time_before}</h6>
-                                                        <div class="post_bottom">
-                                                            <button aria-label="cheer" type="button" class="card-link btn btn-link like_btn" onclick="toggle_cheer('${content['_id']}', 'cheer')">
-                                                                <i class="fa ${class_cheer}" aria-hidden="true"></i>&nbsp;<span class="cheer-num">${count_cheer}</span>
-                                                            </button>
-                                                            <button onclick="go_modify()" type="button" class="card-link btn btn-link modify_btn">수정
-                                                            </button>
-                                                            <button onclick="go_delete(name)" type="button" class="card-link btn btn-link delete_btn">
-                                                                삭제
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>`
-                            $('#posting_box').append(temp_html)
-
-                        }
-
-
-                    }
-                }
-            })
-
-        }
-    */
-
 
 </script>
 {% endblock %}
