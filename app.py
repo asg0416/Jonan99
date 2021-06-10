@@ -66,16 +66,15 @@ def sign_up():
     return render_template('sign_up.html')
 
 
-@app.route('/content/<post_id>')
-def content(post_id):
-    token_receive = request.cookies.get('mytoken')
-    try:
-        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+@app.route('/content')
+def content():
+    return render_template('content.html')
 
-        post_info = db.posting.find_one({"post_id": post_id}, {"_id": False})
-        return render_template('content.html', post_info=post_info)
-    except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
-        return redirect(url_for("login"))
+
+@app.route('/content_modify/<post_id>')
+def content_modify(post_id):
+    post_info = db.posting.find_one({"post_id": post_id}, {"_id": False})
+    return render_template('content_modify.html', post_info=post_info)
 
 
 # 수정
